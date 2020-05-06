@@ -1,0 +1,15 @@
+<!--
+  ~ Copyright © 2020 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 5/4/20 3:26 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<resources>
+
+    <string name="supportedRootError">Unsupported Root ViewGroup | Library Only Support Relative Layout and Constraint Layout (Recommended)</string>
+
+</resources>

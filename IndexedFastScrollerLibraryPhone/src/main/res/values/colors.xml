@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2020 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 5/4/20 2:10 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<resources>
+
+    <color name="default_color">#237DAE</color>
+    <color name="default_color_game">#ae2357</color>
+
+    <color name="light">#f2f7ff</color>
+    <color name="dark">#0a0f18</color>
+
+</resources>
