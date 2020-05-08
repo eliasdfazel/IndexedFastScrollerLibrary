@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/6/20 1:27 PM
+ * Last modified 5/8/20 10:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,7 +12,6 @@ package net.geeksempire.indexedfastscroller.library
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -20,16 +19,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.RelativeLayout
 import android.widget.ScrollView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
-import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
-import net.geeksempire.indexedfastscroller.library.Factory.calculateNavigationBarHeight
-import net.geeksempire.indexedfastscroller.library.Factory.calculateStatusBarHeight
-import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
+import net.geeksempire.indexedfastscroller.library.Extensions.setupRightIndex
+import net.geeksempire.indexedfastscroller.library.Factory.*
 import net.geeksempire.indexedfastscroller.library.databinding.FastScrollerIndexViewBinding
 import java.util.*
 import kotlin.collections.LinkedHashMap
@@ -70,59 +65,44 @@ class IndexedFastScroller(private val context: Context,
         Log.d(this@IndexedFastScroller.javaClass.simpleName, "*** Indexed Fast Scroller Initialized ***")
     }
 
-    fun initializeIndexView() : Deferred<IndexedFastScroller> = CoroutineScope(SupervisorJob() + Dispatchers.Main).async {
+    fun initializeIndexView() : Deferred<IndexedFastScroller> = CoroutineScope(Dispatchers.Main).async {
 
         fastScrollerIndexViewBinding.indexView.removeAllViews()
 
-        when(fastScrollerIndexViewBinding.root.layoutParams) {
-            is ConstraintLayout.LayoutParams -> {
+        when (indexedFastScrollerFactory.indexSide) {
+            IndexSide.RIGHT -> {
 
-                //Root View
-                val rootLayoutParams = fastScrollerIndexViewBinding.root.layoutParams as ConstraintLayout.LayoutParams
-                rootLayoutParams.endToEnd = rootView.id
-
-                fastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
-
+                setupRightIndex(context,
+                    fastScrollerIndexViewBinding,
+                    rootView,
+                    indexedFastScrollerFactory,
+                    finalPopupHorizontalOffset).await()
             }
-            is RelativeLayout.LayoutParams -> {
+            IndexSide.LEFT -> {
 
-                //Root View
-                val rootLayoutParams = fastScrollerIndexViewBinding.root.layoutParams as RelativeLayout.LayoutParams
-                rootLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, rootView.id)
+                setupRightIndex(context,
+                    fastScrollerIndexViewBinding,
+                    rootView,
+                    indexedFastScrollerFactory,
+                    finalPopupHorizontalOffset).await()
+            }
+            IndexSide.BOTTOM -> {
 
-                fastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
-
+                setupRightIndex(context,
+                    fastScrollerIndexViewBinding,
+                    rootView,
+                    indexedFastScrollerFactory,
+                    finalPopupHorizontalOffset).await()
             }
             else -> {
 
-                val unsupportedOperationException = UnsupportedOperationException()
-                unsupportedOperationException.stackTrace = arrayOf(
-                    StackTraceElement("${this@IndexedFastScroller.javaClass.simpleName}", "initializeIndexView()", "${this@IndexedFastScroller.javaClass.simpleName}", 77)
-                )
-                unsupportedOperationException.addSuppressed(Throwable(context.getString(R.string.supportedRootError)))
-
-                throw unsupportedOperationException
+                setupRightIndex(context,
+                    fastScrollerIndexViewBinding,
+                    rootView,
+                    indexedFastScrollerFactory,
+                    finalPopupHorizontalOffset).await()
             }
         }
-
-        //Popup Text
-        val popupIndexLayoutParams = fastScrollerIndexViewBinding.popupIndex.layoutParams as ConstraintLayout.LayoutParams
-        popupIndexLayoutParams.marginEnd = finalPopupHorizontalOffset
-
-        fastScrollerIndexViewBinding.popupIndex.layoutParams = popupIndexLayoutParams
-
-        fastScrollerIndexViewBinding.root
-            .setPadding(indexedFastScrollerFactory.rootPaddingStart, indexedFastScrollerFactory.rootPaddingTop,
-                indexedFastScrollerFactory.rootPaddingEnd, indexedFastScrollerFactory.rootPaddingBottom)
-
-        val popupIndexBackground: Drawable? = indexedFastScrollerFactory.popupBackgroundShape?:context.getDrawable(R.drawable.ic_launcher_balloon)?.mutate()
-        popupIndexBackground?.setTint(indexedFastScrollerFactory.popupBackgroundTint)
-        fastScrollerIndexViewBinding.popupIndex.background = popupIndexBackground
-        fastScrollerIndexViewBinding.popupIndex.setTextColor(indexedFastScrollerFactory.popupTextColor)
-        fastScrollerIndexViewBinding.popupIndex.typeface = indexedFastScrollerFactory.popupTextFont
-        fastScrollerIndexViewBinding.popupIndex.setTextSize(TypedValue.COMPLEX_UNIT_SP, indexedFastScrollerFactory.popupTextSize)
-
-        this@IndexedFastScroller
     }
 
     /**

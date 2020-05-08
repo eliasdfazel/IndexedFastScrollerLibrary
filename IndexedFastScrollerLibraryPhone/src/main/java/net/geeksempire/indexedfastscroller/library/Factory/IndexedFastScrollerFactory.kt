@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/6/20 11:56 AM
+ * Last modified 5/8/20 9:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -39,7 +39,19 @@ import android.graphics.drawable.Drawable
  *
  * @param indexItemTextColor Set Color Of Text For Popup View.
  **/
+
+object IndexSide {
+        const val RIGHT = 0
+        const val LEFT = 1
+        const val BOTTOM = 2
+}
+
 data class IndexedFastScrollerFactory(
+        /**
+         * Set Where To Put Index View RIGHT - LEFT - BOTTOM
+         **/
+        var indexSide: Int = IndexSide.RIGHT,
+
         /**
          * Set Padding For Root View Group
          **/
