@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 12:59 PM
+ * Last modified 5/9/20 1:21 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -115,10 +115,10 @@ class LeftSideIndexedFastScroller(
 
         }
 
-        var sideIndexItem = layoutInflater.inflate(R.layout.fast_scroller_side_index_item, null) as TextView
+        var sideIndexItem = layoutInflater.inflate(R.layout.left_fast_scroller_side_index_item, null) as TextView
 
         mapIndexFirstItem.keys.forEach { indexText ->
-            sideIndexItem = layoutInflater.inflate(R.layout.fast_scroller_side_index_item, null) as TextView
+            sideIndexItem = layoutInflater.inflate(R.layout.left_fast_scroller_side_index_item, null) as TextView
             sideIndexItem.text = indexText.toUpperCase(Locale.getDefault())
 
             sideIndexItem.typeface = indexedFastScrollerFactory.indexItemFont

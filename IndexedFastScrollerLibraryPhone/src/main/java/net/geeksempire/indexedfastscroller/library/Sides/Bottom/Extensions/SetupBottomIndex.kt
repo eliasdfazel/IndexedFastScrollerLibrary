@@ -2,52 +2,34 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 12:54 PM
+ * Last modified 5/9/20 1:55 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.indexedfastscroller.library.Extensions
+package net.geeksempire.indexedfastscroller.library.Sides.Bottom.Extensions
 
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.ViewGroup
 import android.widget.RelativeLayout
-import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
-import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
-import net.geeksempire.indexedfastscroller.library.IndexedFastScroller
 import net.geeksempire.indexedfastscroller.library.R
+import net.geeksempire.indexedfastscroller.library.Sides.Bottom.BottomSideIndexedFastScroller
 import net.geeksempire.indexedfastscroller.library.databinding.BottomFastScrollerIndexViewBinding
 
-fun IndexedFastScroller.setupBottomIndex(
+fun BottomSideIndexedFastScroller.setupBottomIndex(
     context: Context,
     rootView: ViewGroup,
     bottomFastScrollerIndexViewBinding: BottomFastScrollerIndexViewBinding,
     indexedFastScrollerFactory: IndexedFastScrollerFactory,
-    finalPopupHorizontalOffset: Int) {
+    finalPopupVerticalOffset: Int) : BottomSideIndexedFastScroller {
 
     //Root View
     rootView.addView(bottomFastScrollerIndexViewBinding.root)
-
-    bottomFastScrollerIndexViewBinding.indexView.orientation = LinearLayoutCompat.HORIZONTAL
-
-    val indexViewLayoutParams = bottomFastScrollerIndexViewBinding.indexView.layoutParams as ViewGroup.LayoutParams
-
-    indexViewLayoutParams.height = 30.convertToDp(context)
-    indexViewLayoutParams.width = ConstraintLayout.LayoutParams.MATCH_PARENT
-
-    bottomFastScrollerIndexViewBinding.indexView.layoutParams = indexViewLayoutParams
-
-    val nestedIndexScrollViewLayoutParams = bottomFastScrollerIndexViewBinding.nestedIndexScrollView.layoutParams as ConstraintLayout.LayoutParams
-
-    nestedIndexScrollViewLayoutParams.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
-    nestedIndexScrollViewLayoutParams.width = ConstraintLayout.LayoutParams.MATCH_PARENT
-
-    bottomFastScrollerIndexViewBinding.nestedIndexScrollView.layoutParams = nestedIndexScrollViewLayoutParams
 
     when (rootView) {
         is ConstraintLayout -> {
@@ -96,18 +78,18 @@ fun IndexedFastScroller.setupBottomIndex(
         }
     }
 
-    //Popup Text
-    val popupIndexLayoutParams =
-        bottomFastScrollerIndexViewBinding.popupIndex.layoutParams as ConstraintLayout.LayoutParams
-    popupIndexLayoutParams.bottomMargin = finalPopupHorizontalOffset
-
-    bottomFastScrollerIndexViewBinding.popupIndex.layoutParams = popupIndexLayoutParams
-
     bottomFastScrollerIndexViewBinding.root
         .setPadding(
             indexedFastScrollerFactory.rootPaddingStart, indexedFastScrollerFactory.rootPaddingTop,
             indexedFastScrollerFactory.rootPaddingEnd, indexedFastScrollerFactory.rootPaddingBottom
         )
+
+    //Popup Text
+    val popupIndexLayoutParams =
+        bottomFastScrollerIndexViewBinding.popupIndex.layoutParams as ConstraintLayout.LayoutParams
+    popupIndexLayoutParams.bottomMargin = finalPopupVerticalOffset
+
+    bottomFastScrollerIndexViewBinding.popupIndex.layoutParams = popupIndexLayoutParams
 
     val popupIndexBackground: Drawable? =
         indexedFastScrollerFactory.popupBackgroundShape ?: context.getDrawable(
@@ -123,4 +105,6 @@ fun IndexedFastScroller.setupBottomIndex(
         TypedValue.COMPLEX_UNIT_SP,
         indexedFastScrollerFactory.popupTextSize
     )
+
+    return this@setupBottomIndex
 }

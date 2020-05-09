@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 12:58 PM
+ * Last modified 5/9/20 1:44 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -81,18 +81,18 @@ fun LeftSideIndexedFastScroller.setupLeftIndex(
         }
     }
 
+    leftFastScrollerIndexViewBinding.root
+        .setPadding(
+            indexedFastScrollerFactory.rootPaddingStart, indexedFastScrollerFactory.rootPaddingTop,
+            indexedFastScrollerFactory.rootPaddingEnd, indexedFastScrollerFactory.rootPaddingBottom
+        )
+
     //Popup Text
     val popupIndexLayoutParams =
         leftFastScrollerIndexViewBinding.popupIndex.layoutParams as ConstraintLayout.LayoutParams
     popupIndexLayoutParams.marginEnd = finalPopupHorizontalOffset
 
     leftFastScrollerIndexViewBinding.popupIndex.layoutParams = popupIndexLayoutParams
-
-    leftFastScrollerIndexViewBinding.root
-        .setPadding(
-            indexedFastScrollerFactory.rootPaddingStart, indexedFastScrollerFactory.rootPaddingTop,
-            indexedFastScrollerFactory.rootPaddingEnd, indexedFastScrollerFactory.rootPaddingBottom
-        )
 
     val popupIndexBackground: Drawable? =
         indexedFastScrollerFactory.popupBackgroundShape ?: context.getDrawable(

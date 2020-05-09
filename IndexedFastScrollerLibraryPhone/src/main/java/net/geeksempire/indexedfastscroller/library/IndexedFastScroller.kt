@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 12:59 PM
+ * Last modified 5/9/20 1:08 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
 import net.geeksempire.indexedfastscroller.library.Factory.IndexSide
 import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
+import net.geeksempire.indexedfastscroller.library.Sides.Bottom.BottomSideIndexedFastScroller
 import net.geeksempire.indexedfastscroller.library.Sides.Left.LeftSideIndexedFastScroller
 import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScroller
 
@@ -53,7 +54,7 @@ class IndexedFastScroller(
             IndexSide.RIGHT -> {
                 Log.d(this@IndexedFastScroller.javaClass.simpleName, "*** Right Side Index ***")
 
-                val indexedFastScroller: RightSideIndexedFastScroller = RightSideIndexedFastScroller(
+                val rightSideIndexedFastScroller: RightSideIndexedFastScroller = RightSideIndexedFastScroller(
                     context,
                     layoutInflater,
                     rootView,
@@ -61,13 +62,13 @@ class IndexedFastScroller(
                     recyclerView,
                     indexedFastScrollerFactory
                 )
-                indexedFastScroller.initializeIndexView().await()
+                rightSideIndexedFastScroller.initializeIndexView().await()
 
             }
             IndexSide.LEFT -> {
                 Log.d(this@IndexedFastScroller.javaClass.simpleName, "*** Left Side Index ***")
 
-                val indexedFastScroller: LeftSideIndexedFastScroller = LeftSideIndexedFastScroller(
+                val leftSideIndexedFastScroller: LeftSideIndexedFastScroller = LeftSideIndexedFastScroller(
                     context,
                     layoutInflater,
                     rootView,
@@ -75,18 +76,13 @@ class IndexedFastScroller(
                     recyclerView,
                     indexedFastScrollerFactory
                 )
-                indexedFastScroller.initializeIndexView().await()
+                leftSideIndexedFastScroller.initializeIndexView().await()
 
             }
             IndexSide.BOTTOM -> {
                 Log.d(this@IndexedFastScroller.javaClass.simpleName, "*** Bottom Side Index ***")
 
-
-
-            }
-            else -> {
-
-                val indexedFastScroller: RightSideIndexedFastScroller = RightSideIndexedFastScroller(
+                val bottomSideIndexedFastScroller: BottomSideIndexedFastScroller = BottomSideIndexedFastScroller(
                     context,
                     layoutInflater,
                     rootView,
@@ -94,7 +90,20 @@ class IndexedFastScroller(
                     recyclerView,
                     indexedFastScrollerFactory
                 )
-                indexedFastScroller.initializeIndexView().await()
+                bottomSideIndexedFastScroller.initializeIndexView().await()
+
+            }
+            else -> {
+
+                val rightSideIndexedFastScroller: RightSideIndexedFastScroller = RightSideIndexedFastScroller(
+                    context,
+                    layoutInflater,
+                    rootView,
+                    nestedScrollView,
+                    recyclerView,
+                    indexedFastScrollerFactory
+                )
+                rightSideIndexedFastScroller.initializeIndexView().await()
 
             }
         }
