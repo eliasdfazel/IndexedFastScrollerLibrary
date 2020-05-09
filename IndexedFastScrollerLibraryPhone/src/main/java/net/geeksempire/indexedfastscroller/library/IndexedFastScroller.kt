@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 12:55 PM
+ * Last modified 5/9/20 12:59 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
 import net.geeksempire.indexedfastscroller.library.Factory.IndexSide
 import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
+import net.geeksempire.indexedfastscroller.library.Sides.Left.LeftSideIndexedFastScroller
 import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScroller
 
 /**
@@ -66,7 +67,15 @@ class IndexedFastScroller(
             IndexSide.LEFT -> {
                 Log.d(this@IndexedFastScroller.javaClass.simpleName, "*** Left Side Index ***")
 
-
+                val indexedFastScroller: LeftSideIndexedFastScroller = LeftSideIndexedFastScroller(
+                    context,
+                    layoutInflater,
+                    rootView,
+                    nestedScrollView,
+                    recyclerView,
+                    indexedFastScrollerFactory
+                )
+                indexedFastScroller.initializeIndexView().await()
 
             }
             IndexSide.BOTTOM -> {

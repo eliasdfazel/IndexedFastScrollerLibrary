@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 12:43 PM
+ * Last modified 5/9/20 1:05 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -76,7 +76,7 @@ class SampleActivity : AppCompatActivity() {
         /*Indexed Popup Fast Scroller*/
         val indexedFastScrollerFactory = IndexedFastScrollerFactory(
             indexData,
-            indexSide = IndexSide.RIGHT,
+            indexSide = IndexSide.BOTTOM,
             popupEnable = true
         )
         val indexedFastScroller: IndexedFastScroller = IndexedFastScroller(

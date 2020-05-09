@@ -2,13 +2,13 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 12:55 PM
+ * Last modified 5/9/20 12:58 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.indexedfastscroller.library.Extensions
+package net.geeksempire.indexedfastscroller.library.Sides.Left.Extensions
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -17,16 +17,16 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
-import net.geeksempire.indexedfastscroller.library.IndexedFastScroller
 import net.geeksempire.indexedfastscroller.library.R
+import net.geeksempire.indexedfastscroller.library.Sides.Left.LeftSideIndexedFastScroller
 import net.geeksempire.indexedfastscroller.library.databinding.LeftFastScrollerIndexViewBinding
 
-fun IndexedFastScroller.setupLeftIndex(
+fun LeftSideIndexedFastScroller.setupLeftIndex(
     context: Context,
     rootView: ViewGroup,
     leftFastScrollerIndexViewBinding: LeftFastScrollerIndexViewBinding,
     indexedFastScrollerFactory: IndexedFastScrollerFactory,
-    finalPopupHorizontalOffset: Int) {
+    finalPopupHorizontalOffset: Int) : LeftSideIndexedFastScroller {
 
     when (rootView) {
         is ConstraintLayout -> {
@@ -108,4 +108,6 @@ fun IndexedFastScroller.setupLeftIndex(
         TypedValue.COMPLEX_UNIT_SP,
         indexedFastScrollerFactory.popupTextSize
     )
+
+    return this@setupLeftIndex
 }
