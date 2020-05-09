@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/8/20 4:59 PM
+ * Last modified 5/9/20 12:23 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -28,16 +28,18 @@ fun IndexedFastScroller.setupRightIndex(
     indexedFastScrollerFactory: IndexedFastScrollerFactory,
     finalPopupHorizontalOffset: Int) {
 
+    //Root View
+    rootView.addView(fastScrollerIndexViewBinding.root)
+
     when (rootView) {
         is ConstraintLayout -> {
 
-            //Root View
-            rootView.addView(fastScrollerIndexViewBinding.root)
-
             val rootLayoutParams =
                 fastScrollerIndexViewBinding.root.layoutParams as ConstraintLayout.LayoutParams
+
             rootLayoutParams.height = ConstraintLayout.LayoutParams.MATCH_PARENT
             rootLayoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
+
             rootLayoutParams.topToTop = rootView.id
             rootLayoutParams.bottomToBottom = rootView.id
             rootLayoutParams.endToEnd = rootView.id
@@ -47,13 +49,12 @@ fun IndexedFastScroller.setupRightIndex(
         }
         is RelativeLayout -> {
 
-            //Root View
-            rootView.addView(fastScrollerIndexViewBinding.root)
-
             val rootLayoutParams =
                 fastScrollerIndexViewBinding.root.layoutParams as RelativeLayout.LayoutParams
+
             rootLayoutParams.height = ConstraintLayout.LayoutParams.MATCH_PARENT
             rootLayoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
+
             rootLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL)
             rootLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, rootView.id)
 

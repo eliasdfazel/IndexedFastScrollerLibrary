@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/8/20 5:11 PM
+ * Last modified 5/9/20 12:30 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -61,7 +61,7 @@ class SampleActivity : AppCompatActivity() {
 
                 adapterItemData.add(appName)
 
-                indexData.add(appName[0].toString().toUpperCase(Locale.getDefault()))
+                indexData.add(appName[0].toString())
             }
         }
 

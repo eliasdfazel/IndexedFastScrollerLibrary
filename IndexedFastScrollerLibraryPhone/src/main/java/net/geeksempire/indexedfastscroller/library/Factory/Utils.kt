@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/6/20 11:56 AM
+ * Last modified 5/9/20 12:11 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,13 @@ fun Float.convertToDp(context: Context) : Int {
 
     return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
             this@convertToDp,
+            context.resources.displayMetrics).toInt()
+}
+
+fun Int.convertToDp(context: Context) : Int {
+
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+            this@convertToDp.toFloat(),
             context.resources.displayMetrics).toInt()
 }
 

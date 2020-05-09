@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/8/20 4:59 PM
+ * Last modified 5/9/20 12:31 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,7 +29,6 @@ import net.geeksempire.indexedfastscroller.library.Extensions.setupRightIndex
 import net.geeksempire.indexedfastscroller.library.Factory.*
 import net.geeksempire.indexedfastscroller.library.databinding.FastScrollerIndexViewBinding
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.collections.LinkedHashMap
 
 /**
@@ -137,19 +136,19 @@ class IndexedFastScroller(
 
         val mapRangeIndex: LinkedHashMap<Int, String> = LinkedHashMap<Int, String>()
 
-        val finalListOfNewCharOfItemsForIndex = ArrayList<String>()
-
         withContext(Dispatchers.Default) {
 
-            for (indexNumber in 0 until listOfNewCharOfItemsForIndex.size) {
-                val indexText = listOfNewCharOfItemsForIndex[indexNumber]
+            listOfNewCharOfItemsForIndex.forEachIndexed { indexNumber, indexText ->
+
+                val finalIndexText = indexText.toUpperCase(Locale.getDefault())
 
                 /*Avoid Duplication*/
-                if (mapIndexFirstItem[indexText] == null) {
-                    mapIndexFirstItem[indexText] = indexNumber
+                if (mapIndexFirstItem[finalIndexText] == null) {
+                    mapIndexFirstItem[finalIndexText] = indexNumber
                 }
 
-                mapIndexLastItem[indexText] = indexNumber
+                mapIndexLastItem[finalIndexText] = indexNumber
+
             }
 
         }
@@ -159,8 +158,9 @@ class IndexedFastScroller(
         mapIndexFirstItem.keys.forEach { indexText ->
             sideIndexItem = layoutInflater.inflate(R.layout.fast_scroller_side_index_item, null) as TextView
             sideIndexItem.text = indexText.toUpperCase(Locale.getDefault())
-            sideIndexItem.setTextColor(indexedFastScrollerFactory.indexItemTextColor)
+
             sideIndexItem.typeface = indexedFastScrollerFactory.indexItemFont
+            sideIndexItem.setTextColor(indexedFastScrollerFactory.indexItemTextColor)
             sideIndexItem.setTextSize(TypedValue.COMPLEX_UNIT_SP, indexedFastScrollerFactory.indexItemSize)
 
             fastScrollerIndexViewBinding.indexView.addView(sideIndexItem)
@@ -271,12 +271,6 @@ class IndexedFastScroller(
                 MotionEvent.ACTION_UP -> {
                     if (indexedFastScrollerFactory.popupEnable) {
                         if (fastScrollerIndexViewBinding.popupIndex.isShown) {
-
-
-                            println(">>> " + mapIndexFirstItem)
-                            println(">>> " + mapIndexFirstItem["D"])
-                            println(">>> " + mapIndexFirstItem[mapRangeIndex[motionEvent.y.toInt()]])
-                            println(">>> " + mapRangeIndex[motionEvent.y.toInt()])
 
                             nestedScrollView.smoothScrollTo(
                                 0,

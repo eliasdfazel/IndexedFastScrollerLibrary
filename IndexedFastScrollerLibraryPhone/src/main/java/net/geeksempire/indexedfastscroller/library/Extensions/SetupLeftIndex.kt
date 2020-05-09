@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/8/20 5:10 PM
+ * Last modified 5/9/20 12:22 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -36,8 +36,10 @@ fun IndexedFastScroller.setupLeftIndex(
 
             val rootLayoutParams =
                 fastScrollerIndexViewBinding.root.layoutParams as ConstraintLayout.LayoutParams
+
             rootLayoutParams.height = ConstraintLayout.LayoutParams.MATCH_PARENT
             rootLayoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
+
             rootLayoutParams.topToTop = rootView.id
             rootLayoutParams.bottomToBottom = rootView.id
             rootLayoutParams.startToStart = rootView.id
@@ -52,10 +54,12 @@ fun IndexedFastScroller.setupLeftIndex(
 
             val rootLayoutParams =
                 fastScrollerIndexViewBinding.root.layoutParams as RelativeLayout.LayoutParams
+
             rootLayoutParams.height = ConstraintLayout.LayoutParams.MATCH_PARENT
             rootLayoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
+
             rootLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL)
-            rootLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, rootView.id)
+            rootLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_START, rootView.id)
 
             fastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
 
