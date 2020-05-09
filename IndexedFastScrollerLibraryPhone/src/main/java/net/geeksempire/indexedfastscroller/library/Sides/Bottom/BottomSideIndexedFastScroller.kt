@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 1:54 PM
+ * Last modified 5/9/20 3:04 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -176,9 +176,10 @@ class BottomSideIndexedFastScroller(
         bottomFastScrollerIndexViewBinding.nestedIndexScrollView.visibility = View.VISIBLE
 
         val popupIndexOffsetX = (
-                statusBarHeight
+                finalPopupHorizontalOffset
                         + navigationBarBarHeight
-                        + finalPopupHorizontalOffset).toFloat()
+                        + statusBarHeight
+                ).toFloat()
 
         bottomFastScrollerIndexViewBinding.nestedIndexScrollView.setOnTouchListener { view, motionEvent ->
 
@@ -219,7 +220,7 @@ class BottomSideIndexedFastScroller(
                                 0,
                                 recyclerView.getChildAt(
                                     mapIndexFirstItem[mapRangeIndex[motionEvent.x.toInt()]] ?: 0
-                                ).x.toInt()
+                                ).y.toInt()
                             )
 
                         } else {
@@ -240,7 +241,7 @@ class BottomSideIndexedFastScroller(
                                 0,
                                 recyclerView.getChildAt(
                                     mapIndexFirstItem.get(mapRangeIndex[motionEvent.x.toInt()]) ?: 0
-                                ).x.toInt()
+                                ).y.toInt()
                             )
 
                             bottomFastScrollerIndexViewBinding.popupIndex.startAnimation(
@@ -257,7 +258,7 @@ class BottomSideIndexedFastScroller(
                             0,
                             recyclerView.getChildAt(
                                 mapIndexFirstItem.get(mapRangeIndex[motionEvent.x.toInt()]) ?: 0
-                            ).x.toInt()
+                            ).y.toInt()
                         )
                     }
                 }
@@ -269,7 +270,7 @@ class BottomSideIndexedFastScroller(
                                 0,
                                 recyclerView.getChildAt(
                                     mapIndexFirstItem.get(mapRangeIndex[motionEvent.x.toInt()]) ?: 0
-                                ).x.toInt()
+                                ).y.toInt()
                             )
 
                             bottomFastScrollerIndexViewBinding.popupIndex.startAnimation(
@@ -286,7 +287,7 @@ class BottomSideIndexedFastScroller(
                             0,
                             recyclerView.getChildAt(
                                 mapIndexFirstItem.get(mapRangeIndex[motionEvent.x.toInt()]) ?: 0
-                            ).x.toInt()
+                            ).y.toInt()
                         )
                     }
                 }

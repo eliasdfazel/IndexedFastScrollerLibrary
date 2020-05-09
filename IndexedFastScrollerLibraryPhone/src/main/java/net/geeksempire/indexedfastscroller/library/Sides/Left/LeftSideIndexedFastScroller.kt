@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 1:21 PM
+ * Last modified 5/9/20 3:02 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -173,9 +173,10 @@ class LeftSideIndexedFastScroller(
         leftFastScrollerIndexViewBinding.nestedIndexScrollView.visibility = View.VISIBLE
 
         val popupIndexOffsetY = (
-                statusBarHeight
+                finalPopupVerticalOffset
                         + navigationBarBarHeight
-                        + finalPopupVerticalOffset).toFloat()
+                        + statusBarHeight
+                ).toFloat()
 
         leftFastScrollerIndexViewBinding.nestedIndexScrollView.setOnTouchListener { view, motionEvent ->
 
