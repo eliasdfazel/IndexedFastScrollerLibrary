@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/8/20 9:59 AM
+ * Last modified 5/8/20 2:27 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -48,7 +48,7 @@ object IndexSide {
 
 data class IndexedFastScrollerFactory(
         /**
-         * Set Where To Put Index View RIGHT - LEFT - BOTTOM
+         * Set Where To Put Index View IndexSide.RIGHT - IndexSide.LEFT - IndexSide.BOTTOM
          **/
         var indexSide: Int = IndexSide.RIGHT,
 
@@ -115,7 +115,7 @@ data class IndexedFastScrollerFactory(
         /**
          * Set Color Of Text For Item In Index View.
          **/
-        var indexItemTextColor: Int = Color.WHITE,
+        var indexItemTextColor: Int = Color.MAGENTA,
         /**
          * Set Typeface (Font) Of Text For Item In Index View.
          **/

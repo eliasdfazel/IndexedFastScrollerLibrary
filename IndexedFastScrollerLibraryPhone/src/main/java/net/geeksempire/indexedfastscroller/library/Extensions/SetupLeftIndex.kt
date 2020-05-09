@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/8/20 4:59 PM
+ * Last modified 5/8/20 5:10 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,7 +21,7 @@ import net.geeksempire.indexedfastscroller.library.IndexedFastScroller
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.databinding.FastScrollerIndexViewBinding
 
-fun IndexedFastScroller.setupRightIndex(
+fun IndexedFastScroller.setupLeftIndex(
     context: Context,
     rootView: ViewGroup,
     fastScrollerIndexViewBinding: FastScrollerIndexViewBinding,
@@ -40,7 +40,7 @@ fun IndexedFastScroller.setupRightIndex(
             rootLayoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
             rootLayoutParams.topToTop = rootView.id
             rootLayoutParams.bottomToBottom = rootView.id
-            rootLayoutParams.endToEnd = rootView.id
+            rootLayoutParams.startToStart = rootView.id
 
             fastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
 
@@ -65,9 +65,9 @@ fun IndexedFastScroller.setupRightIndex(
             val unsupportedOperationException = UnsupportedOperationException()
             unsupportedOperationException.stackTrace = arrayOf(
                 StackTraceElement(
-                    "${this@setupRightIndex.javaClass.simpleName}",
+                    "${this@setupLeftIndex.javaClass.simpleName}",
                     "initializeIndexView()",
-                    "${this@setupRightIndex.javaClass.simpleName}",
+                    "${this@setupLeftIndex.javaClass.simpleName}",
                     77
                 )
             )
@@ -92,7 +92,7 @@ fun IndexedFastScroller.setupRightIndex(
 
     val popupIndexBackground: Drawable? =
         indexedFastScrollerFactory.popupBackgroundShape ?: context.getDrawable(
-            R.drawable.default_right_popup_background
+            R.drawable.default_left_popup_background
         )?.mutate()
     popupIndexBackground?.setTint(indexedFastScrollerFactory.popupBackgroundTint)
 
