@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/8/20 2:27 PM
+ * Last modified 5/9/20 12:44 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,13 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 
 /**
+ * When Populating Your List Get First Char Of Each Item Title By itemTextTitle.substring(0, 1).toUpperCase(Locale.getDefault()).
+ * & Add It To A ArrayList<String>.
+ * Then Pass It As...
+ *
+ * @param listOfNewCharOfItemsForIndex ArrayList<String>
+ *
+ *
  * @param rootPaddingTop Set Padding For Root View Group
  *
  * @param rootPaddingBottom Set Padding For Root View Group
@@ -47,6 +54,13 @@ object IndexSide {
 }
 
 data class IndexedFastScrollerFactory(
+        /**
+         * When Populating Your List Get First Char Of Each Item Title By itemTextTitle.substring(0, 1).toUpperCase(Locale.getDefault()).
+         * & Add It To A ArrayList<String>.
+         * Then Pass It As...
+         **/
+        val listOfNewCharOfItemsForIndex: ArrayList<String>,
+
         /**
          * Set Where To Put Index View IndexSide.RIGHT - IndexSide.LEFT - IndexSide.BOTTOM
          **/

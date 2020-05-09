@@ -2,13 +2,13 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 12:23 PM
+ * Last modified 5/9/20 12:55 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.indexedfastscroller.library.Extensions
+package net.geeksempire.indexedfastscroller.library.Sides.Right.Extensions
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -17,25 +17,25 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
-import net.geeksempire.indexedfastscroller.library.IndexedFastScroller
 import net.geeksempire.indexedfastscroller.library.R
-import net.geeksempire.indexedfastscroller.library.databinding.FastScrollerIndexViewBinding
+import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScroller
+import net.geeksempire.indexedfastscroller.library.databinding.RightFastScrollerIndexViewBinding
 
-fun IndexedFastScroller.setupRightIndex(
+fun RightSideIndexedFastScroller.setupRightIndex(
     context: Context,
     rootView: ViewGroup,
-    fastScrollerIndexViewBinding: FastScrollerIndexViewBinding,
+    rightFastScrollerIndexViewBinding: RightFastScrollerIndexViewBinding,
     indexedFastScrollerFactory: IndexedFastScrollerFactory,
-    finalPopupHorizontalOffset: Int) {
+    finalPopupHorizontalOffset: Int) : RightSideIndexedFastScroller {
 
     //Root View
-    rootView.addView(fastScrollerIndexViewBinding.root)
+    rootView.addView(rightFastScrollerIndexViewBinding.root)
 
     when (rootView) {
         is ConstraintLayout -> {
 
             val rootLayoutParams =
-                fastScrollerIndexViewBinding.root.layoutParams as ConstraintLayout.LayoutParams
+                rightFastScrollerIndexViewBinding.root.layoutParams as ConstraintLayout.LayoutParams
 
             rootLayoutParams.height = ConstraintLayout.LayoutParams.MATCH_PARENT
             rootLayoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
@@ -44,13 +44,13 @@ fun IndexedFastScroller.setupRightIndex(
             rootLayoutParams.bottomToBottom = rootView.id
             rootLayoutParams.endToEnd = rootView.id
 
-            fastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
+            rightFastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
 
         }
         is RelativeLayout -> {
 
             val rootLayoutParams =
-                fastScrollerIndexViewBinding.root.layoutParams as RelativeLayout.LayoutParams
+                rightFastScrollerIndexViewBinding.root.layoutParams as RelativeLayout.LayoutParams
 
             rootLayoutParams.height = ConstraintLayout.LayoutParams.MATCH_PARENT
             rootLayoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
@@ -58,7 +58,7 @@ fun IndexedFastScroller.setupRightIndex(
             rootLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL)
             rootLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, rootView.id)
 
-            fastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
+            rightFastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
 
         }
         else -> {
@@ -80,12 +80,12 @@ fun IndexedFastScroller.setupRightIndex(
 
     //Popup Text
     val popupIndexLayoutParams =
-        fastScrollerIndexViewBinding.popupIndex.layoutParams as ConstraintLayout.LayoutParams
+        rightFastScrollerIndexViewBinding.popupIndex.layoutParams as ConstraintLayout.LayoutParams
     popupIndexLayoutParams.marginEnd = finalPopupHorizontalOffset
 
-    fastScrollerIndexViewBinding.popupIndex.layoutParams = popupIndexLayoutParams
+    rightFastScrollerIndexViewBinding.popupIndex.layoutParams = popupIndexLayoutParams
 
-    fastScrollerIndexViewBinding.root
+    rightFastScrollerIndexViewBinding.root
         .setPadding(
             indexedFastScrollerFactory.rootPaddingStart, indexedFastScrollerFactory.rootPaddingTop,
             indexedFastScrollerFactory.rootPaddingEnd, indexedFastScrollerFactory.rootPaddingBottom
@@ -97,12 +97,14 @@ fun IndexedFastScroller.setupRightIndex(
         )?.mutate()
     popupIndexBackground?.setTint(indexedFastScrollerFactory.popupBackgroundTint)
 
-    fastScrollerIndexViewBinding.popupIndex.background = popupIndexBackground
-    fastScrollerIndexViewBinding.popupIndex.typeface = indexedFastScrollerFactory.popupTextFont
+    rightFastScrollerIndexViewBinding.popupIndex.background = popupIndexBackground
+    rightFastScrollerIndexViewBinding.popupIndex.typeface = indexedFastScrollerFactory.popupTextFont
 
-    fastScrollerIndexViewBinding.popupIndex.setTextColor(indexedFastScrollerFactory.popupTextColor)
-    fastScrollerIndexViewBinding.popupIndex.setTextSize(
+    rightFastScrollerIndexViewBinding.popupIndex.setTextColor(indexedFastScrollerFactory.popupTextColor)
+    rightFastScrollerIndexViewBinding.popupIndex.setTextSize(
         TypedValue.COMPLEX_UNIT_SP,
         indexedFastScrollerFactory.popupTextSize
     )
+
+    return this@setupRightIndex
 }

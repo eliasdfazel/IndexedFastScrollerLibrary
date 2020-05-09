@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 12:31 PM
+ * Last modified 5/9/20 12:54 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,39 +21,39 @@ import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFa
 import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
 import net.geeksempire.indexedfastscroller.library.IndexedFastScroller
 import net.geeksempire.indexedfastscroller.library.R
-import net.geeksempire.indexedfastscroller.library.databinding.FastScrollerIndexViewBinding
+import net.geeksempire.indexedfastscroller.library.databinding.BottomFastScrollerIndexViewBinding
 
 fun IndexedFastScroller.setupBottomIndex(
     context: Context,
     rootView: ViewGroup,
-    fastScrollerIndexViewBinding: FastScrollerIndexViewBinding,
+    bottomFastScrollerIndexViewBinding: BottomFastScrollerIndexViewBinding,
     indexedFastScrollerFactory: IndexedFastScrollerFactory,
     finalPopupHorizontalOffset: Int) {
 
     //Root View
-    rootView.addView(fastScrollerIndexViewBinding.root)
+    rootView.addView(bottomFastScrollerIndexViewBinding.root)
 
-    fastScrollerIndexViewBinding.indexView.orientation = LinearLayoutCompat.HORIZONTAL
+    bottomFastScrollerIndexViewBinding.indexView.orientation = LinearLayoutCompat.HORIZONTAL
 
-    val indexViewLayoutParams = fastScrollerIndexViewBinding.indexView.layoutParams as ViewGroup.LayoutParams
+    val indexViewLayoutParams = bottomFastScrollerIndexViewBinding.indexView.layoutParams as ViewGroup.LayoutParams
 
     indexViewLayoutParams.height = 30.convertToDp(context)
     indexViewLayoutParams.width = ConstraintLayout.LayoutParams.MATCH_PARENT
 
-    fastScrollerIndexViewBinding.indexView.layoutParams = indexViewLayoutParams
+    bottomFastScrollerIndexViewBinding.indexView.layoutParams = indexViewLayoutParams
 
-    val nestedIndexScrollViewLayoutParams = fastScrollerIndexViewBinding.nestedIndexScrollView.layoutParams as ConstraintLayout.LayoutParams
+    val nestedIndexScrollViewLayoutParams = bottomFastScrollerIndexViewBinding.nestedIndexScrollView.layoutParams as ConstraintLayout.LayoutParams
 
     nestedIndexScrollViewLayoutParams.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
     nestedIndexScrollViewLayoutParams.width = ConstraintLayout.LayoutParams.MATCH_PARENT
 
-    fastScrollerIndexViewBinding.nestedIndexScrollView.layoutParams = nestedIndexScrollViewLayoutParams
+    bottomFastScrollerIndexViewBinding.nestedIndexScrollView.layoutParams = nestedIndexScrollViewLayoutParams
 
     when (rootView) {
         is ConstraintLayout -> {
 
             val rootLayoutParams =
-                fastScrollerIndexViewBinding.root.layoutParams as ConstraintLayout.LayoutParams
+                bottomFastScrollerIndexViewBinding.root.layoutParams as ConstraintLayout.LayoutParams
 
             rootLayoutParams.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
             rootLayoutParams.width = ConstraintLayout.LayoutParams.MATCH_PARENT
@@ -62,13 +62,13 @@ fun IndexedFastScroller.setupBottomIndex(
             rootLayoutParams.startToStart = rootView.id
             rootLayoutParams.endToEnd = rootView.id
 
-            fastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
+            bottomFastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
 
         }
         is RelativeLayout -> {
 
             val rootLayoutParams =
-                fastScrollerIndexViewBinding.root.layoutParams as RelativeLayout.LayoutParams
+                bottomFastScrollerIndexViewBinding.root.layoutParams as RelativeLayout.LayoutParams
 
             rootLayoutParams.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
             rootLayoutParams.width = ConstraintLayout.LayoutParams.MATCH_PARENT
@@ -76,7 +76,7 @@ fun IndexedFastScroller.setupBottomIndex(
             rootLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL)
             rootLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, rootView.id)
 
-            fastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
+            bottomFastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
 
         }
         else -> {
@@ -98,12 +98,12 @@ fun IndexedFastScroller.setupBottomIndex(
 
     //Popup Text
     val popupIndexLayoutParams =
-        fastScrollerIndexViewBinding.popupIndex.layoutParams as ConstraintLayout.LayoutParams
+        bottomFastScrollerIndexViewBinding.popupIndex.layoutParams as ConstraintLayout.LayoutParams
     popupIndexLayoutParams.bottomMargin = finalPopupHorizontalOffset
 
-    fastScrollerIndexViewBinding.popupIndex.layoutParams = popupIndexLayoutParams
+    bottomFastScrollerIndexViewBinding.popupIndex.layoutParams = popupIndexLayoutParams
 
-    fastScrollerIndexViewBinding.root
+    bottomFastScrollerIndexViewBinding.root
         .setPadding(
             indexedFastScrollerFactory.rootPaddingStart, indexedFastScrollerFactory.rootPaddingTop,
             indexedFastScrollerFactory.rootPaddingEnd, indexedFastScrollerFactory.rootPaddingBottom
@@ -115,11 +115,11 @@ fun IndexedFastScroller.setupBottomIndex(
         )?.mutate()
     popupIndexBackground?.setTint(indexedFastScrollerFactory.popupBackgroundTint)
 
-    fastScrollerIndexViewBinding.popupIndex.background = popupIndexBackground
-    fastScrollerIndexViewBinding.popupIndex.typeface = indexedFastScrollerFactory.popupTextFont
+    bottomFastScrollerIndexViewBinding.popupIndex.background = popupIndexBackground
+    bottomFastScrollerIndexViewBinding.popupIndex.typeface = indexedFastScrollerFactory.popupTextFont
 
-    fastScrollerIndexViewBinding.popupIndex.setTextColor(indexedFastScrollerFactory.popupTextColor)
-    fastScrollerIndexViewBinding.popupIndex.setTextSize(
+    bottomFastScrollerIndexViewBinding.popupIndex.setTextColor(indexedFastScrollerFactory.popupTextColor)
+    bottomFastScrollerIndexViewBinding.popupIndex.setTextSize(
         TypedValue.COMPLEX_UNIT_SP,
         indexedFastScrollerFactory.popupTextSize
     )
