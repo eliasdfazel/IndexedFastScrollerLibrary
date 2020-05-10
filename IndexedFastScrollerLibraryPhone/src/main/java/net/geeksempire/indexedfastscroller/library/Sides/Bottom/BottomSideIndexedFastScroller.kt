@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 3:04 PM
+ * Last modified 5/9/20 4:05 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,8 +24,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
 import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
-import net.geeksempire.indexedfastscroller.library.Factory.calculateNavigationBarHeight
-import net.geeksempire.indexedfastscroller.library.Factory.calculateStatusBarHeight
 import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Bottom.Extensions.setupBottomIndex
@@ -56,9 +54,6 @@ class BottomSideIndexedFastScroller(
     private val indexedFastScrollerFactory: IndexedFastScrollerFactory) {
 
     private val bottomFastScrollerIndexViewBinding: BottomFastScrollerIndexViewBinding = BottomFastScrollerIndexViewBinding.inflate(layoutInflater)
-
-    private val statusBarHeight = calculateStatusBarHeight(context.resources)
-    private val navigationBarBarHeight = calculateNavigationBarHeight(context.resources)
 
     private val finalPopupVerticalOffset: Int =
         indexedFastScrollerFactory.popupVerticalOffset.convertToDp(context)
@@ -115,8 +110,6 @@ class BottomSideIndexedFastScroller(
             }
 
         }
-
-        bottomFastScrollerIndexViewBinding.indexView.weightSum = mapIndexFirstItem.keys.size.toFloat()
 
         var sideIndexItem = layoutInflater.inflate(R.layout.bottom_fast_scroller_side_index_item, null) as TextView
 
@@ -177,8 +170,7 @@ class BottomSideIndexedFastScroller(
 
         val popupIndexOffsetX = (
                 finalPopupHorizontalOffset
-                        + navigationBarBarHeight
-                        + statusBarHeight
+                        + bottomFastScrollerIndexViewBinding.popupIndex.width/2
                 ).toFloat()
 
         bottomFastScrollerIndexViewBinding.nestedIndexScrollView.setOnTouchListener { view, motionEvent ->

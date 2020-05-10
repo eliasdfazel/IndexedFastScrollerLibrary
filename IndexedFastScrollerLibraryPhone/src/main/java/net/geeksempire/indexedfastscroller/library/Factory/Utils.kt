@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 12:11 PM
+ * Last modified 5/9/20 3:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -49,4 +49,12 @@ fun calculateNavigationBarHeight(resources: Resources) : Int {
     }
 
     return statusBarHeight
+}
+
+fun displayX(context: Context): Int {
+    return context.resources.displayMetrics.widthPixels
+}
+
+fun displayY(context: Context): Int {
+    return context.resources.displayMetrics.heightPixels
 }
