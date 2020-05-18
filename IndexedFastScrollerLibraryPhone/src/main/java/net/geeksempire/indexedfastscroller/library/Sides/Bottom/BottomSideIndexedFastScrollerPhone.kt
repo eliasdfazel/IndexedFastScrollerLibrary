@@ -2,13 +2,13 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 3:02 PM
+ * Last modified 5/18/20 9:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.indexedfastscroller.library.Sides.Left
+package net.geeksempire.indexedfastscroller.library.Sides.Bottom
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -24,14 +24,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
 import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
-import net.geeksempire.indexedfastscroller.library.Factory.calculateNavigationBarHeight
-import net.geeksempire.indexedfastscroller.library.Factory.calculateStatusBarHeight
 import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
 import net.geeksempire.indexedfastscroller.library.R
-import net.geeksempire.indexedfastscroller.library.Sides.Left.Extensions.setupLeftIndex
-import net.geeksempire.indexedfastscroller.library.databinding.LeftFastScrollerIndexViewBinding
+import net.geeksempire.indexedfastscroller.library.Sides.Bottom.Extensions.setupBottomIndex
+import net.geeksempire.indexedfastscroller.library.databinding.BottomFastScrollerIndexViewBinding
 import java.util.*
 import kotlin.collections.LinkedHashMap
+
 
 /**
  * Enabling ViewBinding Is Highly Recommended.
@@ -46,7 +45,7 @@ import kotlin.collections.LinkedHashMap
  *
  * @param indexedFastScrollerFactory Change Default Value Or Just Pass IndexedFastScrollerFactory()
  **/
-class LeftSideIndexedFastScroller(
+class BottomSideIndexedFastScrollerPhone(
     private val context: Context,
     private val layoutInflater: LayoutInflater,
     private val rootView: ViewGroup,
@@ -54,10 +53,7 @@ class LeftSideIndexedFastScroller(
     private val recyclerView: RecyclerView,
     private val indexedFastScrollerFactory: IndexedFastScrollerFactory) {
 
-    private val leftFastScrollerIndexViewBinding: LeftFastScrollerIndexViewBinding = LeftFastScrollerIndexViewBinding.inflate(layoutInflater)
-
-    private val statusBarHeight = calculateStatusBarHeight(context.resources)
-    private val navigationBarBarHeight = calculateNavigationBarHeight(context.resources)
+    private val bottomFastScrollerIndexViewBinding: BottomFastScrollerIndexViewBinding = BottomFastScrollerIndexViewBinding.inflate(layoutInflater)
 
     private val finalPopupVerticalOffset: Int =
         indexedFastScrollerFactory.popupVerticalOffset.convertToDp(context)
@@ -66,22 +62,22 @@ class LeftSideIndexedFastScroller(
         indexedFastScrollerFactory.popupHorizontalOffset.convertToDp(context)
 
     init {
-        Log.d(this@LeftSideIndexedFastScroller.javaClass.simpleName, "*** Indexed Fast Scroller Initialized ***")
+        Log.d(this@BottomSideIndexedFastScrollerPhone.javaClass.simpleName, "*** Indexed Fast Scroller Initialized ***")
     }
 
-    fun initializeIndexView(): Deferred<LeftSideIndexedFastScroller> = CoroutineScope(SupervisorJob() + Dispatchers.Main).async {
+    fun initializeIndexView(): Deferred<BottomSideIndexedFastScrollerPhone> = CoroutineScope(SupervisorJob() + Dispatchers.Main).async {
 
-        leftFastScrollerIndexViewBinding.indexView.removeAllViews()
+        bottomFastScrollerIndexViewBinding.indexView.removeAllViews()
 
-        setupLeftIndex(
+        setupBottomIndex(
             context,
             rootView,
-            leftFastScrollerIndexViewBinding,
+            bottomFastScrollerIndexViewBinding,
             indexedFastScrollerFactory,
-            finalPopupHorizontalOffset
+            finalPopupVerticalOffset
         ).loadIndexData(indexedFastScrollerFactory.listOfNewCharOfItemsForIndex).await()
 
-        this@LeftSideIndexedFastScroller
+        this@BottomSideIndexedFastScrollerPhone
     }
 
     /**
@@ -115,17 +111,17 @@ class LeftSideIndexedFastScroller(
 
         }
 
-        var sideIndexItem = layoutInflater.inflate(R.layout.left_fast_scroller_side_index_item, null) as TextView
+        var sideIndexItem = layoutInflater.inflate(R.layout.bottom_fast_scroller_side_index_item, null) as TextView
 
         mapIndexFirstItem.keys.forEach { indexText ->
-            sideIndexItem = layoutInflater.inflate(R.layout.left_fast_scroller_side_index_item, null) as TextView
+            sideIndexItem = layoutInflater.inflate(R.layout.bottom_fast_scroller_side_index_item, null) as TextView
             sideIndexItem.text = indexText.toUpperCase(Locale.getDefault())
 
             sideIndexItem.typeface = indexedFastScrollerFactory.indexItemFont
             sideIndexItem.setTextColor(indexedFastScrollerFactory.indexItemTextColor)
             sideIndexItem.setTextSize(TypedValue.COMPLEX_UNIT_SP, indexedFastScrollerFactory.indexItemSize)
 
-            leftFastScrollerIndexViewBinding.indexView.addView(sideIndexItem)
+            bottomFastScrollerIndexViewBinding.indexView.addView(sideIndexItem)
         }
 
         val finalTextView = sideIndexItem
@@ -134,11 +130,11 @@ class LeftSideIndexedFastScroller(
         delay(777)
         /* *** */
 
-        var upperRange = (leftFastScrollerIndexViewBinding.indexView.y - finalTextView.height).toInt()
+        var upperRange = (bottomFastScrollerIndexViewBinding.indexView.x - finalTextView.width).toInt()
 
-        for (number in 0 until leftFastScrollerIndexViewBinding.indexView.childCount) {
-            val indexText = (leftFastScrollerIndexViewBinding.indexView.getChildAt(number) as TextView).text.toString()
-            val indexRange = (leftFastScrollerIndexViewBinding.indexView.getChildAt(number).y + leftFastScrollerIndexViewBinding.indexView.y + finalTextView.height).toInt()
+        for (number in 0 until bottomFastScrollerIndexViewBinding.indexView.childCount) {
+            val indexText = (bottomFastScrollerIndexViewBinding.indexView.getChildAt(number) as TextView).text.toString()
+            val indexRange = (bottomFastScrollerIndexViewBinding.indexView.getChildAt(number).x + bottomFastScrollerIndexViewBinding.indexView.x + finalTextView.width).toInt()
 
             for (jRange in upperRange..indexRange) {
                 mapRangeIndex[jRange] = indexText
@@ -164,127 +160,125 @@ class LeftSideIndexedFastScroller(
         mapIndexFirstItem: LinkedHashMap<String, Int>,
         mapRangeIndex: LinkedHashMap<Int, String>) {
 
-        leftFastScrollerIndexViewBinding.nestedIndexScrollView.startAnimation(
+        bottomFastScrollerIndexViewBinding.nestedIndexScrollView.startAnimation(
             AnimationUtils.loadAnimation(
                 context,
                 android.R.anim.fade_in
             )
         )
-        leftFastScrollerIndexViewBinding.nestedIndexScrollView.visibility = View.VISIBLE
+        bottomFastScrollerIndexViewBinding.nestedIndexScrollView.visibility = View.VISIBLE
 
-        val popupIndexOffsetY = (
-                finalPopupVerticalOffset
-                        + navigationBarBarHeight
-                        + statusBarHeight
+        val popupIndexOffsetX = (
+                finalPopupHorizontalOffset
+                        + bottomFastScrollerIndexViewBinding.popupIndex.width/2
                 ).toFloat()
 
-        leftFastScrollerIndexViewBinding.nestedIndexScrollView.setOnTouchListener { view, motionEvent ->
+        bottomFastScrollerIndexViewBinding.nestedIndexScrollView.setOnTouchListener { view, motionEvent ->
 
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
                     if (indexedFastScrollerFactory.popupEnable) {
-                        val indexText = mapRangeIndex[motionEvent.y.toInt()]
+                        val indexText = mapRangeIndex[motionEvent.x.toInt()]
 
                         if (indexText != null) {
-                            leftFastScrollerIndexViewBinding.popupIndex.y = motionEvent.rawY - popupIndexOffsetY
-                            leftFastScrollerIndexViewBinding.popupIndex.text = indexText
-                            leftFastScrollerIndexViewBinding.popupIndex.startAnimation(
+                            bottomFastScrollerIndexViewBinding.popupIndex.x = motionEvent.rawX - popupIndexOffsetX
+                            bottomFastScrollerIndexViewBinding.popupIndex.text = indexText
+                            bottomFastScrollerIndexViewBinding.popupIndex.startAnimation(
                                 AnimationUtils.loadAnimation(
                                     context,
                                     android.R.anim.fade_in
                                 )
                             )
-                            leftFastScrollerIndexViewBinding.popupIndex.visibility = View.VISIBLE
+                            bottomFastScrollerIndexViewBinding.popupIndex.visibility = View.VISIBLE
                         }
                     }
                 }
                 MotionEvent.ACTION_MOVE -> {
                     if (indexedFastScrollerFactory.popupEnable) {
-                        val indexText = mapRangeIndex[motionEvent.y.toInt()]
+                        val indexText = mapRangeIndex[motionEvent.x.toInt()]
 
                         if (indexText != null) {
-                            if (!leftFastScrollerIndexViewBinding.popupIndex.isShown) {
-                                leftFastScrollerIndexViewBinding.popupIndex.startAnimation(
+                            if (!bottomFastScrollerIndexViewBinding.popupIndex.isShown) {
+                                bottomFastScrollerIndexViewBinding.popupIndex.startAnimation(
                                     AnimationUtils.loadAnimation(context, android.R.anim.fade_in)
                                 )
-                                leftFastScrollerIndexViewBinding.popupIndex.visibility = View.VISIBLE
+                                bottomFastScrollerIndexViewBinding.popupIndex.visibility = View.VISIBLE
                             }
 
-                            leftFastScrollerIndexViewBinding.popupIndex.y =
-                                motionEvent.rawY - popupIndexOffsetY
-                            leftFastScrollerIndexViewBinding.popupIndex.text = indexText
+                            bottomFastScrollerIndexViewBinding.popupIndex.x = motionEvent.rawX - popupIndexOffsetX
+                            bottomFastScrollerIndexViewBinding.popupIndex.text = indexText
 
                             nestedScrollView.smoothScrollTo(
                                 0,
                                 recyclerView.getChildAt(
-                                    mapIndexFirstItem[mapRangeIndex[motionEvent.y.toInt()]] ?: 0
+                                    mapIndexFirstItem[mapRangeIndex[motionEvent.x.toInt()]] ?: 0
                                 ).y.toInt()
                             )
 
                         } else {
-                            if (leftFastScrollerIndexViewBinding.popupIndex.isShown) {
-                                leftFastScrollerIndexViewBinding.popupIndex.startAnimation(
+                            if (bottomFastScrollerIndexViewBinding.popupIndex.isShown) {
+                                bottomFastScrollerIndexViewBinding.popupIndex.startAnimation(
                                     AnimationUtils.loadAnimation(context, android.R.anim.fade_out)
                                 )
-                                leftFastScrollerIndexViewBinding.popupIndex.visibility = View.INVISIBLE
+                                bottomFastScrollerIndexViewBinding.popupIndex.visibility = View.INVISIBLE
                             }
                         }
                     }
                 }
                 MotionEvent.ACTION_UP -> {
                     if (indexedFastScrollerFactory.popupEnable) {
-                        if (leftFastScrollerIndexViewBinding.popupIndex.isShown) {
+                        if (bottomFastScrollerIndexViewBinding.popupIndex.isShown) {
 
                             nestedScrollView.smoothScrollTo(
                                 0,
                                 recyclerView.getChildAt(
-                                    mapIndexFirstItem.get(mapRangeIndex[motionEvent.y.toInt()]) ?: 0
+                                    mapIndexFirstItem.get(mapRangeIndex[motionEvent.x.toInt()]) ?: 0
                                 ).y.toInt()
                             )
 
-                            leftFastScrollerIndexViewBinding.popupIndex.startAnimation(
+                            bottomFastScrollerIndexViewBinding.popupIndex.startAnimation(
                                 AnimationUtils.loadAnimation(
                                     context,
                                     android.R.anim.fade_out
                                 )
                             )
-                            leftFastScrollerIndexViewBinding.popupIndex.visibility = View.INVISIBLE
+                            bottomFastScrollerIndexViewBinding.popupIndex.visibility = View.INVISIBLE
                         }
                     } else {
 
                         nestedScrollView.smoothScrollTo(
                             0,
                             recyclerView.getChildAt(
-                                mapIndexFirstItem.get(mapRangeIndex[motionEvent.y.toInt()]) ?: 0
+                                mapIndexFirstItem.get(mapRangeIndex[motionEvent.x.toInt()]) ?: 0
                             ).y.toInt()
                         )
                     }
                 }
                 MotionEvent.ACTION_CANCEL -> {
                     if (indexedFastScrollerFactory.popupEnable) {
-                        if (leftFastScrollerIndexViewBinding.popupIndex.isShown) {
+                        if (bottomFastScrollerIndexViewBinding.popupIndex.isShown) {
 
                             nestedScrollView.smoothScrollTo(
                                 0,
                                 recyclerView.getChildAt(
-                                    mapIndexFirstItem.get(mapRangeIndex[motionEvent.y.toInt()]) ?: 0
+                                    mapIndexFirstItem.get(mapRangeIndex[motionEvent.x.toInt()]) ?: 0
                                 ).y.toInt()
                             )
 
-                            leftFastScrollerIndexViewBinding.popupIndex.startAnimation(
+                            bottomFastScrollerIndexViewBinding.popupIndex.startAnimation(
                                 AnimationUtils.loadAnimation(
                                     context,
                                     android.R.anim.fade_out
                                 )
                             )
-                            leftFastScrollerIndexViewBinding.popupIndex.visibility = View.INVISIBLE
+                            bottomFastScrollerIndexViewBinding.popupIndex.visibility = View.INVISIBLE
                         }
                     } else {
 
                         nestedScrollView.smoothScrollTo(
                             0,
                             recyclerView.getChildAt(
-                                mapIndexFirstItem.get(mapRangeIndex[motionEvent.y.toInt()]) ?: 0
+                                mapIndexFirstItem.get(mapRangeIndex[motionEvent.x.toInt()]) ?: 0
                             ).y.toInt()
                         )
                     }

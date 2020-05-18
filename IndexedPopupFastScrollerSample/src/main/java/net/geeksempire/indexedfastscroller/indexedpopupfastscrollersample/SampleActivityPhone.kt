@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 1:05 PM
+ * Last modified 5/18/20 9:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,11 +23,11 @@ import kotlinx.coroutines.withContext
 import net.geeksempire.indexedfastscroller.indexedpopupfastscrollersample.databinding.ActivitySampleViewsBinding
 import net.geeksempire.indexedfastscroller.library.Factory.IndexSide
 import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
-import net.geeksempire.indexedfastscroller.library.IndexedFastScroller
+import net.geeksempire.indexedfastscroller.library.IndexedFastScrollerPhone
 import java.util.*
 import kotlin.collections.ArrayList
 
-class SampleActivity : AppCompatActivity() {
+class SampleActivityPhone : AppCompatActivity() {
 
     private lateinit var activitySampleViewsBinding: ActivitySampleViewsBinding
 
@@ -67,7 +67,7 @@ class SampleActivity : AppCompatActivity() {
 
         withContext(Dispatchers.Main) {
 
-            val sampleRecyclerViewAdapter = SampleRecyclerViewAdapter(applicationContext, adapterItemData)
+            val sampleRecyclerViewAdapter = SampleRecyclerViewAdapterPhone(applicationContext, adapterItemData)
 
             activitySampleViewsBinding.recyclerViewList.adapter = sampleRecyclerViewAdapter
             sampleRecyclerViewAdapter.notifyDataSetChanged()
@@ -79,7 +79,7 @@ class SampleActivity : AppCompatActivity() {
             indexSide = IndexSide.BOTTOM,
             popupEnable = true
         )
-        val indexedFastScroller: IndexedFastScroller = IndexedFastScroller(
+        val indexedFastScrollerPhone: IndexedFastScrollerPhone = IndexedFastScrollerPhone(
             context = applicationContext,
             layoutInflater = layoutInflater,
             rootView = activitySampleViewsBinding.MainView,
@@ -87,7 +87,7 @@ class SampleActivity : AppCompatActivity() {
             recyclerView = activitySampleViewsBinding.recyclerViewList,
             indexedFastScrollerFactory = indexedFastScrollerFactory
         )
-        indexedFastScroller.setupIndex().await()
+        indexedFastScrollerPhone.setupIndex().await()
         /*Indexed Popup Fast Scroller*/
     }
 }

@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 1:08 PM
+ * Last modified 5/18/20 9:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,9 +19,9 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
 import net.geeksempire.indexedfastscroller.library.Factory.IndexSide
 import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
-import net.geeksempire.indexedfastscroller.library.Sides.Bottom.BottomSideIndexedFastScroller
-import net.geeksempire.indexedfastscroller.library.Sides.Left.LeftSideIndexedFastScroller
-import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScroller
+import net.geeksempire.indexedfastscroller.library.Sides.Bottom.BottomSideIndexedFastScrollerPhone
+import net.geeksempire.indexedfastscroller.library.Sides.Left.LeftSideIndexedFastScrollerPhone
+import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScrollerPhone
 
 /**
  * Enabling ViewBinding Is Highly Recommended.
@@ -36,7 +36,7 @@ import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedF
  *
  * @param indexedFastScrollerFactory Change Default Value Or Just Pass IndexedFastScrollerFactory()
  **/
-class IndexedFastScroller(
+class IndexedFastScrollerPhone(
     private val context: Context,
     private val layoutInflater: LayoutInflater,
     private val rootView: ViewGroup,
@@ -45,16 +45,16 @@ class IndexedFastScroller(
     private val indexedFastScrollerFactory: IndexedFastScrollerFactory) {
 
     init {
-        Log.d(this@IndexedFastScroller.javaClass.simpleName, "*** Indexed Fast Scroller Initialized ***")
+        Log.d(this@IndexedFastScrollerPhone.javaClass.simpleName, "*** Indexed Fast Scroller Initialized ***")
     }
 
-    fun setupIndex(): Deferred<IndexedFastScroller> = CoroutineScope(SupervisorJob() + Dispatchers.Main).async {
+    fun setupIndex(): Deferred<IndexedFastScrollerPhone> = CoroutineScope(SupervisorJob() + Dispatchers.Main).async {
 
         when (indexedFastScrollerFactory.indexSide) {
             IndexSide.RIGHT -> {
-                Log.d(this@IndexedFastScroller.javaClass.simpleName, "*** Right Side Index ***")
+                Log.d(this@IndexedFastScrollerPhone.javaClass.simpleName, "*** Right Side Index ***")
 
-                val rightSideIndexedFastScroller: RightSideIndexedFastScroller = RightSideIndexedFastScroller(
+                val rightSideIndexedFastScrollerPhone: RightSideIndexedFastScrollerPhone = RightSideIndexedFastScrollerPhone(
                     context,
                     layoutInflater,
                     rootView,
@@ -62,13 +62,13 @@ class IndexedFastScroller(
                     recyclerView,
                     indexedFastScrollerFactory
                 )
-                rightSideIndexedFastScroller.initializeIndexView().await()
+                rightSideIndexedFastScrollerPhone.initializeIndexView().await()
 
             }
             IndexSide.LEFT -> {
-                Log.d(this@IndexedFastScroller.javaClass.simpleName, "*** Left Side Index ***")
+                Log.d(this@IndexedFastScrollerPhone.javaClass.simpleName, "*** Left Side Index ***")
 
-                val leftSideIndexedFastScroller: LeftSideIndexedFastScroller = LeftSideIndexedFastScroller(
+                val leftSideIndexedFastScrollerPhone: LeftSideIndexedFastScrollerPhone = LeftSideIndexedFastScrollerPhone(
                     context,
                     layoutInflater,
                     rootView,
@@ -76,13 +76,13 @@ class IndexedFastScroller(
                     recyclerView,
                     indexedFastScrollerFactory
                 )
-                leftSideIndexedFastScroller.initializeIndexView().await()
+                leftSideIndexedFastScrollerPhone.initializeIndexView().await()
 
             }
             IndexSide.BOTTOM -> {
-                Log.d(this@IndexedFastScroller.javaClass.simpleName, "*** Bottom Side Index ***")
+                Log.d(this@IndexedFastScrollerPhone.javaClass.simpleName, "*** Bottom Side Index ***")
 
-                val bottomSideIndexedFastScroller: BottomSideIndexedFastScroller = BottomSideIndexedFastScroller(
+                val bottomSideIndexedFastScrollerPhone: BottomSideIndexedFastScrollerPhone = BottomSideIndexedFastScrollerPhone(
                     context,
                     layoutInflater,
                     rootView,
@@ -90,12 +90,12 @@ class IndexedFastScroller(
                     recyclerView,
                     indexedFastScrollerFactory
                 )
-                bottomSideIndexedFastScroller.initializeIndexView().await()
+                bottomSideIndexedFastScrollerPhone.initializeIndexView().await()
 
             }
             else -> {
 
-                val rightSideIndexedFastScroller: RightSideIndexedFastScroller = RightSideIndexedFastScroller(
+                val rightSideIndexedFastScrollerPhone: RightSideIndexedFastScrollerPhone = RightSideIndexedFastScrollerPhone(
                     context,
                     layoutInflater,
                     rootView,
@@ -103,11 +103,11 @@ class IndexedFastScroller(
                     recyclerView,
                     indexedFastScrollerFactory
                 )
-                rightSideIndexedFastScroller.initializeIndexView().await()
+                rightSideIndexedFastScrollerPhone.initializeIndexView().await()
 
             }
         }
 
-        this@IndexedFastScroller
+        this@IndexedFastScrollerPhone
     }
 }

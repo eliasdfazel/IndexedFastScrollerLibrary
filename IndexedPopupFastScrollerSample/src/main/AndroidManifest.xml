@@ -3,7 +3,7 @@
   ~ Copyright © 2020 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/8/20 10:15 AM
+  ~ Last modified 5/18/20 9:12 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -19,7 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".SampleActivity">
+        <activity android:name=".SampleActivityPhone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 1:46 PM
+ * Last modified 5/18/20 9:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,15 +18,15 @@ import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
 import net.geeksempire.indexedfastscroller.library.R
-import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScroller
+import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScrollerPhone
 import net.geeksempire.indexedfastscroller.library.databinding.RightFastScrollerIndexViewBinding
 
-fun RightSideIndexedFastScroller.setupRightIndex(
+fun RightSideIndexedFastScrollerPhone.setupRightIndex(
     context: Context,
     rootView: ViewGroup,
     rightFastScrollerIndexViewBinding: RightFastScrollerIndexViewBinding,
     indexedFastScrollerFactory: IndexedFastScrollerFactory,
-    finalPopupHorizontalOffset: Int) : RightSideIndexedFastScroller {
+    finalPopupHorizontalOffset: Int) : RightSideIndexedFastScrollerPhone {
 
     //Root View
     rootView.addView(rightFastScrollerIndexViewBinding.root)

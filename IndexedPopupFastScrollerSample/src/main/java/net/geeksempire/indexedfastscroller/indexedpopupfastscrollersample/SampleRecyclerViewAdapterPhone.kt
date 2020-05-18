@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/8/20 5:11 PM
+ * Last modified 5/18/20 9:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,23 +19,23 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 
-class SampleRecyclerViewAdapter (private val context: Context,
-                                 private var adapterItemData: ArrayList<String>) : RecyclerView.Adapter<SampleRecyclerViewAdapter.ViewHolder>() {
+class SampleRecyclerViewAdapterPhone (private val context: Context,
+                                      private var adapterItemData: ArrayList<String>) : RecyclerView.Adapter<SampleRecyclerViewAdapterPhone.ViewHolder>() {
 
     init {
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SampleRecyclerViewAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SampleRecyclerViewAdapterPhone.ViewHolder {
 
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.adapter_item_sample_views, parent, false))
     }
 
-    override fun onBindViewHolder(viewHolderBinder: SampleRecyclerViewAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolderBinderPhone: SampleRecyclerViewAdapterPhone.ViewHolder, position: Int) {
 
-        viewHolderBinder.textItemView.text = adapterItemData[position]
+        viewHolderBinderPhone.textItemView.text = adapterItemData[position]
 
-        viewHolderBinder.fullItemView.setOnClickListener {
+        viewHolderBinderPhone.fullItemView.setOnClickListener {
 
             Toast.makeText(context,
                 adapterItemData[position],
