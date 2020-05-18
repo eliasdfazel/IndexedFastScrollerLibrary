@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/8/20 10:09 AM
+ * Last modified 5/18/20 9:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,3 +11,4 @@
 rootProject.name='IndexedFastScrollerLibrary'
 include ':IndexedFastScrollerLibraryPhone'
 include ':IndexedPopupFastScrollerSample'
+include ':IndexedFastScrollerLibraryWatch'
