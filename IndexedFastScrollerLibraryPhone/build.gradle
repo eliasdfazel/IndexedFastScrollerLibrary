@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/28/20 7:06 PM
+ * Last modified 6/3/20 12:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,7 +21,7 @@ android {
     defaultConfig {
         //Package Name: net.geeksempire.indexedfastscroller.library
 
-        minSdkVersion 23
+        minSdkVersion 25
         targetSdkVersion 29
 
         versionCode 1
@@ -47,8 +47,8 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    viewBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding = true
     }
 }
 
