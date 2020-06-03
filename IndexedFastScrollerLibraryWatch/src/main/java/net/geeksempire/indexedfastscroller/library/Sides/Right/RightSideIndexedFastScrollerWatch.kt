@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 2:56 AM
+ * Last modified 6/3/20 7:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,8 +23,6 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
-import net.geeksempire.indexedfastscroller.library.Factory.calculateNavigationBarHeight
-import net.geeksempire.indexedfastscroller.library.Factory.calculateStatusBarHeight
 import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
 import net.geeksempire.indexedfastscroller.library.Factory.indexedFastScrollerFactoryWatch
 import net.geeksempire.indexedfastscroller.library.R
@@ -56,15 +54,6 @@ class RightSideIndexedFastScrollerWatch(
 
     private val rightFastScrollerIndexViewBinding: RightFastScrollerIndexViewBinding = RightFastScrollerIndexViewBinding.inflate(layoutInflater)
 
-    private val statusBarHeight = calculateStatusBarHeight(context.resources)
-    private val navigationBarBarHeight = calculateNavigationBarHeight(context.resources)
-
-    private val finalPopupVerticalOffset: Int =
-        indexedFastScrollerFactoryWatchWatch.popupVerticalOffset.convertToDp(context)
-
-    private val finalPopupHorizontalOffset: Int =
-        indexedFastScrollerFactoryWatchWatch.popupHorizontalOffset.convertToDp(context)
-
     init {
         Log.d(this@RightSideIndexedFastScrollerWatch.javaClass.simpleName, "*** Indexed Fast Scroller Initialized ***")
     }
@@ -78,8 +67,7 @@ class RightSideIndexedFastScrollerWatch(
             rootView,
             layoutInflater,
             rightFastScrollerIndexViewBinding,
-            indexedFastScrollerFactoryWatchWatch,
-            finalPopupHorizontalOffset
+            indexedFastScrollerFactoryWatchWatch
         ).loadIndexData(indexedFastScrollerFactoryWatchWatch.listOfNewCharOfItemsForIndex).await()
 
         this@RightSideIndexedFastScrollerWatch
@@ -126,17 +114,17 @@ class RightSideIndexedFastScrollerWatch(
             rightFastScrollerIndexViewBinding.indexView.addView(sideIndexItem)
         }
 
-        val finalTextView = sideIndexItem
+        val finalTextViewHeight = 19F.convertToDp(context)
 
         /* *** */
         delay(777)
         /* *** */
 
-        var upperRange = (rightFastScrollerIndexViewBinding.indexView.y - finalTextView.height).toInt()
+        var upperRange = (rightFastScrollerIndexViewBinding.indexView.y - finalTextViewHeight).toInt()
 
         for (number in 0 until rightFastScrollerIndexViewBinding.indexView.childCount) {
             val indexText = (rightFastScrollerIndexViewBinding.indexView.getChildAt(number) as TextView).text.toString()
-            val indexRange = (rightFastScrollerIndexViewBinding.indexView.getChildAt(number).y + rightFastScrollerIndexViewBinding.indexView.y + finalTextView.height).toInt()
+            val indexRange = (rightFastScrollerIndexViewBinding.indexView.getChildAt(number).y + rightFastScrollerIndexViewBinding.indexView.y + finalTextViewHeight).toInt()
 
             for (jRange in upperRange..indexRange) {
                 mapRangeIndex[jRange] = indexText
@@ -164,11 +152,6 @@ class RightSideIndexedFastScrollerWatch(
 
         rightFastScrollerIndexViewBinding.nestedIndexScrollView.visibility = View.VISIBLE
 
-        val popupIndexOffsetY = (
-                statusBarHeight
-                        + navigationBarBarHeight
-                        + finalPopupVerticalOffset).toFloat()
-
         rightFastScrollerIndexViewBinding.nestedIndexScrollView.setOnTouchListener { view, motionEvent ->
 
             when (motionEvent.action) {
@@ -177,7 +160,6 @@ class RightSideIndexedFastScrollerWatch(
                         val indexText = mapRangeIndex[motionEvent.y.toInt()]
 
                         if (indexText != null) {
-                            rightFastScrollerIndexViewBinding.popupIndex.y = motionEvent.rawY - popupIndexOffsetY
                             rightFastScrollerIndexViewBinding.popupIndex.text = indexText
                             rightFastScrollerIndexViewBinding.popupIndex.startAnimation(
                                 AnimationUtils.loadAnimation(
@@ -201,8 +183,6 @@ class RightSideIndexedFastScrollerWatch(
                                 rightFastScrollerIndexViewBinding.popupIndex.visibility = View.VISIBLE
                             }
 
-                            rightFastScrollerIndexViewBinding.popupIndex.y =
-                                motionEvent.rawY - popupIndexOffsetY
                             rightFastScrollerIndexViewBinding.popupIndex.text = indexText
 
                             nestedScrollView.smoothScrollTo(

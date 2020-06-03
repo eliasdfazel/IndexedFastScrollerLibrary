@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 2:52 AM
+ * Last modified 6/3/20 7:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -79,9 +79,10 @@ class SampleActivityPhone : AppCompatActivity() {
             indexData,
             indexItemTextColor = Color.MAGENTA,
             indexSide = IndexSide.RIGHT,
-            popupEnable = true
+            popupEnable = true,
+            popupTextColor = Color.GREEN
         )
-        val indexedFastScrollerPhone: IndexedFastScrollerWatch = IndexedFastScrollerWatch(
+        val indexedFastScrollerWatch: IndexedFastScrollerWatch = IndexedFastScrollerWatch(
             context = applicationContext,
             layoutInflater = layoutInflater,
             rootView = activitySampleViewsBinding.MainView,
@@ -89,7 +90,7 @@ class SampleActivityPhone : AppCompatActivity() {
             recyclerView = activitySampleViewsBinding.recyclerViewList,
             indexedFastScrollerFactoryWatch = indexedFastScrollerFactoryWatch
         )
-        indexedFastScrollerPhone.setupIndex().await()
+        indexedFastScrollerWatch.setupIndex().await()
         /*Indexed Popup Fast Scroller*/
     }
 }

@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 3:16 AM
+ * Last modified 6/3/20 7:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -74,8 +74,14 @@ fun RightSideIndexedFastScrollerWatch.setupRightIndex(
     rootView: ViewGroup,
     layoutInflater: LayoutInflater,
     rightFastScrollerIndexViewBinding: RightFastScrollerIndexViewBinding,
-    indexedFastScrollerFactoryWatch: indexedFastScrollerFactoryWatch,
-    finalPopupHorizontalOffset: Int) : RightSideIndexedFastScrollerWatch {
+    indexedFastScrollerFactoryWatch: indexedFastScrollerFactoryWatch) : RightSideIndexedFastScrollerWatch {
+
+    setupCurveRightIndex(
+        context,
+        rootView,
+        layoutInflater,
+        indexedFastScrollerFactoryWatch
+    )
 
     //Root View
     rootView.addView(rightFastScrollerIndexViewBinding.root)
@@ -134,12 +140,6 @@ fun RightSideIndexedFastScrollerWatch.setupRightIndex(
         )
 
     //Popup Text
-    val popupIndexLayoutParams =
-        rightFastScrollerIndexViewBinding.popupIndex.layoutParams as ConstraintLayout.LayoutParams
-    popupIndexLayoutParams.marginEnd = finalPopupHorizontalOffset
-
-    rightFastScrollerIndexViewBinding.popupIndex.layoutParams = popupIndexLayoutParams
-
     val popupIndexBackground: Drawable? =
         indexedFastScrollerFactoryWatch.popupBackgroundShape ?: context.getDrawable(
             R.drawable.default_right_popup_background
@@ -153,13 +153,6 @@ fun RightSideIndexedFastScrollerWatch.setupRightIndex(
     rightFastScrollerIndexViewBinding.popupIndex.setTextSize(
         TypedValue.COMPLEX_UNIT_SP,
         indexedFastScrollerFactoryWatch.popupTextSize
-    )
-
-    setupCurveRightIndex(
-        context,
-        rootView,
-        layoutInflater,
-        indexedFastScrollerFactoryWatch
     )
 
     return this@setupRightIndex

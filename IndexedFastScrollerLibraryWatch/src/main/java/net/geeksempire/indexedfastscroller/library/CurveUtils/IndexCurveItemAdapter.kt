@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 2:37 AM
+ * Last modified 6/3/20 7:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,7 +27,7 @@ class IndexCurveItemAdapter(private val context: Context,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.fast_scroller_side_index_item, parent, false))
+        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.right_curve_fast_scroller_side_index_item, parent, false))
     }
 
     @SuppressLint("ClickableViewAccessibility")
