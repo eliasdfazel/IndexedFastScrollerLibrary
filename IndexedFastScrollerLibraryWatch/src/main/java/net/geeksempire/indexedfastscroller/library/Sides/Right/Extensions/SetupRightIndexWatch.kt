@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 1:50 AM
+ * Last modified 6/3/20 2:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -28,7 +28,7 @@ import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScrollerWatch
 import net.geeksempire.indexedfastscroller.library.databinding.RightFastScrollerIndexViewBinding
 
-private fun RightSideIndexedFastScrollerWatch.setupCurveRightIndex(
+private fun setupCurveRightIndex(
     context: Context,
     rootView: ViewGroup,
     indexedFastScrollerFactory: IndexedFastScrollerFactory) = CoroutineScope(SupervisorJob() + Dispatchers.Main).async {
@@ -53,14 +53,20 @@ private fun RightSideIndexedFastScrollerWatch.setupCurveRightIndex(
         scrollDegreesPerScreen = 90f
     }
 
+    val listOfNewCharOfItemsForIndex = indexedFastScrollerFactory.listOfNewCharOfItemsForIndex
+
+    val stringHashSet: Set<String> = LinkedHashSet(listOfNewCharOfItemsForIndex)
+    listOfNewCharOfItemsForIndex.clear()
+    listOfNewCharOfItemsForIndex.addAll(stringHashSet)
+
     val indexCurveItemAdapter: IndexCurveItemAdapter = IndexCurveItemAdapter(context,
         indexedFastScrollerFactory,
-        indexedFastScrollerFactory.listOfNewCharOfItemsForIndex)
+        listOfNewCharOfItemsForIndex)
     nestedIndexScrollViewCurve.adapter = indexCurveItemAdapter
 
     delay(500)
 
-    nestedIndexScrollViewCurve.smoothScrollToPosition(indexedFastScrollerFactory.listOfNewCharOfItemsForIndex.size/2)
+    nestedIndexScrollViewCurve.smoothScrollToPosition(listOfNewCharOfItemsForIndex.size/2)
     nestedIndexScrollViewCurve.visibility = View.VISIBLE
 }
 
@@ -79,10 +85,6 @@ fun RightSideIndexedFastScrollerWatch.setupRightIndex(
 
     //Root View
     rootView.addView(rightFastScrollerIndexViewBinding.root)
-
-//    rootView.children.asIterable().forEachIndexed { index, view ->
-//
-//    }
 
     when (rootView) {
         is ConstraintLayout -> {
