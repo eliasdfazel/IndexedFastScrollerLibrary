@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 7:28 AM
+ * Last modified 6/3/20 7:40 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -152,7 +152,7 @@ class RightSideIndexedFastScrollerWatch(
 
         rightFastScrollerIndexViewBinding.nestedIndexScrollView.visibility = View.VISIBLE
 
-        rightFastScrollerIndexViewBinding.nestedIndexScrollView.setOnTouchListener { view, motionEvent ->
+        rightFastScrollerIndexViewBinding.nestedIndexScrollView.setOnTouchListener { view: View, motionEvent: MotionEvent ->
 
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {

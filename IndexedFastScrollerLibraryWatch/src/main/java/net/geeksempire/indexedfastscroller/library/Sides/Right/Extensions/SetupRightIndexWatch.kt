@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 7:28 AM
+ * Last modified 6/3/20 7:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,6 +23,7 @@ import androidx.wear.widget.WearableRecyclerView
 import kotlinx.coroutines.*
 import net.geeksempire.indexedfastscroller.library.CurveUtils.IndexCurveItemAdapter
 import net.geeksempire.indexedfastscroller.library.CurveUtils.IndexCurveWearLayoutManager
+import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
 import net.geeksempire.indexedfastscroller.library.Factory.indexedFastScrollerFactoryWatch
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScrollerWatch
@@ -107,8 +108,8 @@ fun RightSideIndexedFastScrollerWatch.setupRightIndex(
             val rootLayoutParams =
                 rightFastScrollerIndexViewBinding.root.layoutParams as RelativeLayout.LayoutParams
 
-            rootLayoutParams.height = ConstraintLayout.LayoutParams.MATCH_PARENT
-            rootLayoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            rootLayoutParams.height = RelativeLayout.LayoutParams.MATCH_PARENT
+            rootLayoutParams.width = RelativeLayout.LayoutParams.WRAP_CONTENT
 
             rootLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL)
             rootLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, rootView.id)
@@ -140,6 +141,21 @@ fun RightSideIndexedFastScrollerWatch.setupRightIndex(
         )
 
     //Popup Text
+    val popupIndexLayoutParams =
+        rightFastScrollerIndexViewBinding.root.layoutParams as ConstraintLayout.LayoutParams
+
+    popupIndexLayoutParams.height = 57.convertToDp(context)
+    popupIndexLayoutParams.width = 57.convertToDp(context)
+
+    popupIndexLayoutParams.topToTop = rootView.id
+    popupIndexLayoutParams.bottomToBottom = rootView.id
+    popupIndexLayoutParams.startToStart = rootView.id
+    popupIndexLayoutParams.endToEnd = rootView.id
+
+    rightFastScrollerIndexViewBinding.popupIndex.layoutParams = popupIndexLayoutParams
+
+    rightFastScrollerIndexViewBinding.popupIndex.visibility = View.VISIBLE
+
     val popupIndexBackground: Drawable? =
         indexedFastScrollerFactoryWatch.popupBackgroundShape ?: context.getDrawable(
             R.drawable.default_right_popup_background
