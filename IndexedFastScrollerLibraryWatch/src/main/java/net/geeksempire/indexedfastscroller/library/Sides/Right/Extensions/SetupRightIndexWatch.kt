@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 7:57 AM
+ * Last modified 6/3/20 9:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,11 +23,10 @@ import androidx.wear.widget.WearableRecyclerView
 import kotlinx.coroutines.*
 import net.geeksempire.indexedfastscroller.library.CurveUtils.IndexCurveItemAdapter
 import net.geeksempire.indexedfastscroller.library.CurveUtils.IndexCurveWearLayoutManager
-import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
 import net.geeksempire.indexedfastscroller.library.Factory.indexedFastScrollerFactoryWatch
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScrollerWatch
-import net.geeksempire.indexedfastscroller.library.databinding.RightFastScrollerIndexViewBinding
+import net.geeksempire.indexedfastscroller.library.databinding.RightFastScrollerIndexViewWatchBinding
 
 private fun setupCurveRightIndex(
     context: Context,
@@ -35,7 +34,7 @@ private fun setupCurveRightIndex(
     layoutInflater: LayoutInflater,
     indexedFastScrollerFactoryWatch: indexedFastScrollerFactoryWatch) = CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
 
-    val fastScrollerCurvedIndexView = layoutInflater.inflate(R.layout.right_curve_fast_scroller_index_view, null) as RelativeLayout
+    val fastScrollerCurvedIndexView = layoutInflater.inflate(R.layout.right_curve_fast_scroller_index_view_watch, null) as RelativeLayout
     val nestedIndexScrollViewCurve = fastScrollerCurvedIndexView.findViewById<WearableRecyclerView>(R.id.nestedIndexScrollViewCurve)
     rootView.addView(fastScrollerCurvedIndexView, 0)
 
@@ -74,7 +73,7 @@ fun RightSideIndexedFastScrollerWatch.setupRightIndex(
     context: Context,
     rootView: ViewGroup,
     layoutInflater: LayoutInflater,
-    rightFastScrollerIndexViewBinding: RightFastScrollerIndexViewBinding,
+    rightFastScrollerIndexViewBinding: RightFastScrollerIndexViewWatchBinding,
     indexedFastScrollerFactoryWatch: indexedFastScrollerFactoryWatch) : RightSideIndexedFastScrollerWatch {
 
     setupCurveRightIndex(
@@ -94,7 +93,7 @@ fun RightSideIndexedFastScrollerWatch.setupRightIndex(
                 rightFastScrollerIndexViewBinding.root.layoutParams as ConstraintLayout.LayoutParams
 
             rootLayoutParams.height = ConstraintLayout.LayoutParams.MATCH_PARENT
-            rootLayoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            rootLayoutParams.width = ConstraintLayout.LayoutParams.MATCH_PARENT
 
             rootLayoutParams.topToTop = rootView.id
             rootLayoutParams.bottomToBottom = rootView.id
@@ -109,7 +108,7 @@ fun RightSideIndexedFastScrollerWatch.setupRightIndex(
                 rightFastScrollerIndexViewBinding.root.layoutParams as RelativeLayout.LayoutParams
 
             rootLayoutParams.height = RelativeLayout.LayoutParams.MATCH_PARENT
-            rootLayoutParams.width = RelativeLayout.LayoutParams.WRAP_CONTENT
+            rootLayoutParams.width = RelativeLayout.LayoutParams.MATCH_PARENT
 
             rootLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL)
             rootLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, rootView.id)
@@ -134,28 +133,7 @@ fun RightSideIndexedFastScrollerWatch.setupRightIndex(
         }
     }
 
-    rightFastScrollerIndexViewBinding.root
-        .setPadding(
-            indexedFastScrollerFactoryWatch.rootPaddingStart, indexedFastScrollerFactoryWatch.rootPaddingTop,
-            indexedFastScrollerFactoryWatch.rootPaddingEnd, indexedFastScrollerFactoryWatch.rootPaddingBottom
-        )
-
     //Popup Text
-    val popupIndexLayoutParams =
-        rightFastScrollerIndexViewBinding.root.layoutParams as ConstraintLayout.LayoutParams
-
-    popupIndexLayoutParams.height = 57.convertToDp(context)
-    popupIndexLayoutParams.width = 57.convertToDp(context)
-
-    popupIndexLayoutParams.topToTop = rootView.id
-    popupIndexLayoutParams.bottomToBottom = rootView.id
-    popupIndexLayoutParams.startToStart = rootView.id
-    popupIndexLayoutParams.endToEnd = rootView.id
-
-    rightFastScrollerIndexViewBinding.popupIndex.layoutParams = popupIndexLayoutParams
-
-    rightFastScrollerIndexViewBinding.popupIndex.visibility = View.VISIBLE
-
     val popupIndexBackground: Drawable? =
         indexedFastScrollerFactoryWatch.popupBackgroundShape ?: context.getDrawable(
             R.drawable.default_right_popup_background

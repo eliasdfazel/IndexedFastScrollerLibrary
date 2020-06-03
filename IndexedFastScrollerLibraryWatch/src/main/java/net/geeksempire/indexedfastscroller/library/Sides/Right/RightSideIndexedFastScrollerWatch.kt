@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 7:40 AM
+ * Last modified 6/3/20 9:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,7 +27,7 @@ import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
 import net.geeksempire.indexedfastscroller.library.Factory.indexedFastScrollerFactoryWatch
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Right.Extensions.setupRightIndex
-import net.geeksempire.indexedfastscroller.library.databinding.RightFastScrollerIndexViewBinding
+import net.geeksempire.indexedfastscroller.library.databinding.RightFastScrollerIndexViewWatchBinding
 import java.util.*
 import kotlin.collections.LinkedHashMap
 
@@ -52,7 +52,7 @@ class RightSideIndexedFastScrollerWatch(
     private val recyclerView: RecyclerView,
     private val indexedFastScrollerFactoryWatchWatch: indexedFastScrollerFactoryWatch) {
 
-    private val rightFastScrollerIndexViewBinding: RightFastScrollerIndexViewBinding = RightFastScrollerIndexViewBinding.inflate(layoutInflater)
+    private val rightFastScrollerIndexViewBinding: RightFastScrollerIndexViewWatchBinding = RightFastScrollerIndexViewWatchBinding.inflate(layoutInflater)
 
     init {
         Log.d(this@RightSideIndexedFastScrollerWatch.javaClass.simpleName, "*** Indexed Fast Scroller Initialized ***")
@@ -93,7 +93,7 @@ class RightSideIndexedFastScrollerWatch(
 
                 val finalIndexText = indexText.toUpperCase(Locale.getDefault())
 
-                /*Avoid Duplication*/
+                /* Avoid Duplication */
                 if (mapIndexFirstItem[finalIndexText] == null) {
                     mapIndexFirstItem[finalIndexText] = indexNumber
                 }
@@ -104,10 +104,10 @@ class RightSideIndexedFastScrollerWatch(
 
         }
 
-        var sideIndexItem = layoutInflater.inflate(R.layout.right_fast_scroller_side_index_item, null) as TextView
+        var sideIndexItem = layoutInflater.inflate(R.layout.right_fast_scroller_side_index_item_watch, null) as TextView
 
         mapIndexFirstItem.keys.forEach { indexText ->
-            sideIndexItem = layoutInflater.inflate(R.layout.right_fast_scroller_side_index_item, null) as TextView
+            sideIndexItem = layoutInflater.inflate(R.layout.right_fast_scroller_side_index_item_watch, null) as TextView
             sideIndexItem.text = indexText.toUpperCase(Locale.getDefault())
             sideIndexItem.setTextColor(Color.TRANSPARENT)
 
@@ -152,7 +152,7 @@ class RightSideIndexedFastScrollerWatch(
 
         rightFastScrollerIndexViewBinding.nestedIndexScrollView.visibility = View.VISIBLE
 
-        rightFastScrollerIndexViewBinding.nestedIndexScrollView.setOnTouchListener { view: View, motionEvent: MotionEvent ->
+        rightFastScrollerIndexViewBinding.nestedIndexScrollView.setOnTouchListener { view, motionEvent ->
 
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {

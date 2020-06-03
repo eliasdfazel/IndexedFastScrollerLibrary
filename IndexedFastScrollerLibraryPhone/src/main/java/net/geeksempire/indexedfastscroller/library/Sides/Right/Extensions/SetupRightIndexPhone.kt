@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/18/20 9:12 AM
+ * Last modified 6/3/20 9:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,23 +19,23 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScrollerPhone
-import net.geeksempire.indexedfastscroller.library.databinding.RightFastScrollerIndexViewBinding
+import net.geeksempire.indexedfastscroller.library.databinding.RightFastScrollerIndexViewPhoneBinding
 
 fun RightSideIndexedFastScrollerPhone.setupRightIndex(
     context: Context,
     rootView: ViewGroup,
-    rightFastScrollerIndexViewBinding: RightFastScrollerIndexViewBinding,
+    rightFastScrollerIndexViewPhoneBinding: RightFastScrollerIndexViewPhoneBinding,
     indexedFastScrollerFactory: IndexedFastScrollerFactory,
     finalPopupHorizontalOffset: Int) : RightSideIndexedFastScrollerPhone {
 
     //Root View
-    rootView.addView(rightFastScrollerIndexViewBinding.root)
+    rootView.addView(rightFastScrollerIndexViewPhoneBinding.root)
 
     when (rootView) {
         is ConstraintLayout -> {
 
             val rootLayoutParams =
-                rightFastScrollerIndexViewBinding.root.layoutParams as ConstraintLayout.LayoutParams
+                rightFastScrollerIndexViewPhoneBinding.root.layoutParams as ConstraintLayout.LayoutParams
 
             rootLayoutParams.height = ConstraintLayout.LayoutParams.MATCH_PARENT
             rootLayoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
@@ -44,13 +44,13 @@ fun RightSideIndexedFastScrollerPhone.setupRightIndex(
             rootLayoutParams.bottomToBottom = rootView.id
             rootLayoutParams.endToEnd = rootView.id
 
-            rightFastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
+            rightFastScrollerIndexViewPhoneBinding.root.layoutParams = rootLayoutParams
 
         }
         is RelativeLayout -> {
 
             val rootLayoutParams =
-                rightFastScrollerIndexViewBinding.root.layoutParams as RelativeLayout.LayoutParams
+                rightFastScrollerIndexViewPhoneBinding.root.layoutParams as RelativeLayout.LayoutParams
 
             rootLayoutParams.height = ConstraintLayout.LayoutParams.MATCH_PARENT
             rootLayoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
@@ -58,7 +58,7 @@ fun RightSideIndexedFastScrollerPhone.setupRightIndex(
             rootLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL)
             rootLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, rootView.id)
 
-            rightFastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
+            rightFastScrollerIndexViewPhoneBinding.root.layoutParams = rootLayoutParams
 
         }
         else -> {
@@ -78,7 +78,7 @@ fun RightSideIndexedFastScrollerPhone.setupRightIndex(
         }
     }
 
-    rightFastScrollerIndexViewBinding.root
+    rightFastScrollerIndexViewPhoneBinding.root
         .setPadding(
             indexedFastScrollerFactory.rootPaddingStart, indexedFastScrollerFactory.rootPaddingTop,
             indexedFastScrollerFactory.rootPaddingEnd, indexedFastScrollerFactory.rootPaddingBottom
@@ -86,10 +86,10 @@ fun RightSideIndexedFastScrollerPhone.setupRightIndex(
 
     //Popup Text
     val popupIndexLayoutParams =
-        rightFastScrollerIndexViewBinding.popupIndex.layoutParams as ConstraintLayout.LayoutParams
+        rightFastScrollerIndexViewPhoneBinding.popupIndex.layoutParams as ConstraintLayout.LayoutParams
     popupIndexLayoutParams.marginEnd = finalPopupHorizontalOffset
 
-    rightFastScrollerIndexViewBinding.popupIndex.layoutParams = popupIndexLayoutParams
+    rightFastScrollerIndexViewPhoneBinding.popupIndex.layoutParams = popupIndexLayoutParams
 
     val popupIndexBackground: Drawable? =
         indexedFastScrollerFactory.popupBackgroundShape ?: context.getDrawable(
@@ -97,11 +97,11 @@ fun RightSideIndexedFastScrollerPhone.setupRightIndex(
         )?.mutate()
     popupIndexBackground?.setTint(indexedFastScrollerFactory.popupBackgroundTint)
 
-    rightFastScrollerIndexViewBinding.popupIndex.background = popupIndexBackground
-    rightFastScrollerIndexViewBinding.popupIndex.typeface = indexedFastScrollerFactory.popupTextFont
+    rightFastScrollerIndexViewPhoneBinding.popupIndex.background = popupIndexBackground
+    rightFastScrollerIndexViewPhoneBinding.popupIndex.typeface = indexedFastScrollerFactory.popupTextFont
 
-    rightFastScrollerIndexViewBinding.popupIndex.setTextColor(indexedFastScrollerFactory.popupTextColor)
-    rightFastScrollerIndexViewBinding.popupIndex.setTextSize(
+    rightFastScrollerIndexViewPhoneBinding.popupIndex.setTextColor(indexedFastScrollerFactory.popupTextColor)
+    rightFastScrollerIndexViewPhoneBinding.popupIndex.setTextSize(
         TypedValue.COMPLEX_UNIT_SP,
         indexedFastScrollerFactory.popupTextSize
     )

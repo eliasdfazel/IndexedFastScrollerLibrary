@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/18/20 9:12 AM
+ * Last modified 6/3/20 9:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,7 +29,7 @@ import net.geeksempire.indexedfastscroller.library.Factory.calculateStatusBarHei
 import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Left.Extensions.setupLeftIndex
-import net.geeksempire.indexedfastscroller.library.databinding.LeftFastScrollerIndexViewBinding
+import net.geeksempire.indexedfastscroller.library.databinding.LeftFastScrollerIndexViewPhoneBinding
 import java.util.*
 import kotlin.collections.LinkedHashMap
 
@@ -54,7 +54,7 @@ class LeftSideIndexedFastScrollerPhone(
     private val recyclerView: RecyclerView,
     private val indexedFastScrollerFactory: IndexedFastScrollerFactory) {
 
-    private val leftFastScrollerIndexViewBinding: LeftFastScrollerIndexViewBinding = LeftFastScrollerIndexViewBinding.inflate(layoutInflater)
+    private val leftFastScrollerIndexViewBinding: LeftFastScrollerIndexViewPhoneBinding = LeftFastScrollerIndexViewPhoneBinding.inflate(layoutInflater)
 
     private val statusBarHeight = calculateStatusBarHeight(context.resources)
     private val navigationBarBarHeight = calculateNavigationBarHeight(context.resources)
@@ -115,10 +115,10 @@ class LeftSideIndexedFastScrollerPhone(
 
         }
 
-        var sideIndexItem = layoutInflater.inflate(R.layout.left_fast_scroller_side_index_item, null) as TextView
+        var sideIndexItem = layoutInflater.inflate(R.layout.left_fast_scroller_side_index_item_phone, null) as TextView
 
         mapIndexFirstItem.keys.forEach { indexText ->
-            sideIndexItem = layoutInflater.inflate(R.layout.left_fast_scroller_side_index_item, null) as TextView
+            sideIndexItem = layoutInflater.inflate(R.layout.left_fast_scroller_side_index_item_phone, null) as TextView
             sideIndexItem.text = indexText.toUpperCase(Locale.getDefault())
 
             sideIndexItem.typeface = indexedFastScrollerFactory.indexItemFont

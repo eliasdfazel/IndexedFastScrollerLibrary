@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 2:37 AM
+ * Last modified 6/3/20 9:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,8 +19,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
 import net.geeksempire.indexedfastscroller.library.Factory.IndexSide
 import net.geeksempire.indexedfastscroller.library.Factory.indexedFastScrollerFactoryWatch
-import net.geeksempire.indexedfastscroller.library.Sides.Bottom.BottomSideIndexedFastScrollerWatch
-import net.geeksempire.indexedfastscroller.library.Sides.Left.LeftSideIndexedFastScrollerWatch
 import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScrollerWatch
 
 /**
@@ -68,29 +66,11 @@ class IndexedFastScrollerWatch(
             IndexSide.LEFT -> {
                 Log.d(this@IndexedFastScrollerWatch.javaClass.simpleName, "*** Left Side Index ***")
 
-                val leftSideIndexedFastScrollerWatch: LeftSideIndexedFastScrollerWatch = LeftSideIndexedFastScrollerWatch(
-                    context,
-                    layoutInflater,
-                    rootView,
-                    nestedScrollView,
-                    recyclerView,
-                    indexedFastScrollerFactoryWatch
-                )
-                leftSideIndexedFastScrollerWatch.initializeIndexView().await()
 
             }
             IndexSide.BOTTOM -> {
                 Log.d(this@IndexedFastScrollerWatch.javaClass.simpleName, "*** Bottom Side Index ***")
 
-                val bottomSideIndexedFastScrollerWatch: BottomSideIndexedFastScrollerWatch = BottomSideIndexedFastScrollerWatch(
-                    context,
-                    layoutInflater,
-                    rootView,
-                    nestedScrollView,
-                    recyclerView,
-                    indexedFastScrollerFactoryWatch
-                )
-                bottomSideIndexedFastScrollerWatch.initializeIndexView().await()
 
             }
             else -> {

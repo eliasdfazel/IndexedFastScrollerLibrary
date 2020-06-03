@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/18/20 9:12 AM
+ * Last modified 6/3/20 9:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,12 +19,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Left.LeftSideIndexedFastScrollerPhone
-import net.geeksempire.indexedfastscroller.library.databinding.LeftFastScrollerIndexViewBinding
+import net.geeksempire.indexedfastscroller.library.databinding.LeftFastScrollerIndexViewPhoneBinding
 
 fun LeftSideIndexedFastScrollerPhone.setupLeftIndex(
     context: Context,
     rootView: ViewGroup,
-    leftFastScrollerIndexViewBinding: LeftFastScrollerIndexViewBinding,
+    leftFastScrollerIndexViewPhoneBinding: LeftFastScrollerIndexViewPhoneBinding,
     indexedFastScrollerFactory: IndexedFastScrollerFactory,
     finalPopupHorizontalOffset: Int) : LeftSideIndexedFastScrollerPhone {
 
@@ -32,10 +32,10 @@ fun LeftSideIndexedFastScrollerPhone.setupLeftIndex(
         is ConstraintLayout -> {
 
             //Root View
-            rootView.addView(leftFastScrollerIndexViewBinding.root)
+            rootView.addView(leftFastScrollerIndexViewPhoneBinding.root)
 
             val rootLayoutParams =
-                leftFastScrollerIndexViewBinding.root.layoutParams as ConstraintLayout.LayoutParams
+                leftFastScrollerIndexViewPhoneBinding.root.layoutParams as ConstraintLayout.LayoutParams
 
             rootLayoutParams.height = ConstraintLayout.LayoutParams.MATCH_PARENT
             rootLayoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
@@ -44,16 +44,16 @@ fun LeftSideIndexedFastScrollerPhone.setupLeftIndex(
             rootLayoutParams.bottomToBottom = rootView.id
             rootLayoutParams.startToStart = rootView.id
 
-            leftFastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
+            leftFastScrollerIndexViewPhoneBinding.root.layoutParams = rootLayoutParams
 
         }
         is RelativeLayout -> {
 
             //Root View
-            rootView.addView(leftFastScrollerIndexViewBinding.root)
+            rootView.addView(leftFastScrollerIndexViewPhoneBinding.root)
 
             val rootLayoutParams =
-                leftFastScrollerIndexViewBinding.root.layoutParams as RelativeLayout.LayoutParams
+                leftFastScrollerIndexViewPhoneBinding.root.layoutParams as RelativeLayout.LayoutParams
 
             rootLayoutParams.height = ConstraintLayout.LayoutParams.MATCH_PARENT
             rootLayoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
@@ -61,7 +61,7 @@ fun LeftSideIndexedFastScrollerPhone.setupLeftIndex(
             rootLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL)
             rootLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_START, rootView.id)
 
-            leftFastScrollerIndexViewBinding.root.layoutParams = rootLayoutParams
+            leftFastScrollerIndexViewPhoneBinding.root.layoutParams = rootLayoutParams
 
         }
         else -> {
@@ -81,7 +81,7 @@ fun LeftSideIndexedFastScrollerPhone.setupLeftIndex(
         }
     }
 
-    leftFastScrollerIndexViewBinding.root
+    leftFastScrollerIndexViewPhoneBinding.root
         .setPadding(
             indexedFastScrollerFactory.rootPaddingStart, indexedFastScrollerFactory.rootPaddingTop,
             indexedFastScrollerFactory.rootPaddingEnd, indexedFastScrollerFactory.rootPaddingBottom
@@ -89,10 +89,10 @@ fun LeftSideIndexedFastScrollerPhone.setupLeftIndex(
 
     //Popup Text
     val popupIndexLayoutParams =
-        leftFastScrollerIndexViewBinding.popupIndex.layoutParams as ConstraintLayout.LayoutParams
+        leftFastScrollerIndexViewPhoneBinding.popupIndex.layoutParams as ConstraintLayout.LayoutParams
     popupIndexLayoutParams.marginEnd = finalPopupHorizontalOffset
 
-    leftFastScrollerIndexViewBinding.popupIndex.layoutParams = popupIndexLayoutParams
+    leftFastScrollerIndexViewPhoneBinding.popupIndex.layoutParams = popupIndexLayoutParams
 
     val popupIndexBackground: Drawable? =
         indexedFastScrollerFactory.popupBackgroundShape ?: context.getDrawable(
@@ -100,11 +100,11 @@ fun LeftSideIndexedFastScrollerPhone.setupLeftIndex(
         )?.mutate()
     popupIndexBackground?.setTint(indexedFastScrollerFactory.popupBackgroundTint)
 
-    leftFastScrollerIndexViewBinding.popupIndex.background = popupIndexBackground
-    leftFastScrollerIndexViewBinding.popupIndex.typeface = indexedFastScrollerFactory.popupTextFont
+    leftFastScrollerIndexViewPhoneBinding.popupIndex.background = popupIndexBackground
+    leftFastScrollerIndexViewPhoneBinding.popupIndex.typeface = indexedFastScrollerFactory.popupTextFont
 
-    leftFastScrollerIndexViewBinding.popupIndex.setTextColor(indexedFastScrollerFactory.popupTextColor)
-    leftFastScrollerIndexViewBinding.popupIndex.setTextSize(
+    leftFastScrollerIndexViewPhoneBinding.popupIndex.setTextColor(indexedFastScrollerFactory.popupTextColor)
+    leftFastScrollerIndexViewPhoneBinding.popupIndex.setTextSize(
         TypedValue.COMPLEX_UNIT_SP,
         indexedFastScrollerFactory.popupTextSize
     )

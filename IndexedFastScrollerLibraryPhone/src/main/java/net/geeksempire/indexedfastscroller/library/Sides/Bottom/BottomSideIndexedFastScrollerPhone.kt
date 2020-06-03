@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/18/20 9:12 AM
+ * Last modified 6/3/20 9:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,7 +27,7 @@ import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFa
 import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Bottom.Extensions.setupBottomIndex
-import net.geeksempire.indexedfastscroller.library.databinding.BottomFastScrollerIndexViewBinding
+import net.geeksempire.indexedfastscroller.library.databinding.BottomFastScrollerIndexViewPhoneBinding
 import java.util.*
 import kotlin.collections.LinkedHashMap
 
@@ -53,7 +53,7 @@ class BottomSideIndexedFastScrollerPhone(
     private val recyclerView: RecyclerView,
     private val indexedFastScrollerFactory: IndexedFastScrollerFactory) {
 
-    private val bottomFastScrollerIndexViewBinding: BottomFastScrollerIndexViewBinding = BottomFastScrollerIndexViewBinding.inflate(layoutInflater)
+    private val bottomFastScrollerIndexViewPhoneBinding: BottomFastScrollerIndexViewPhoneBinding = BottomFastScrollerIndexViewPhoneBinding.inflate(layoutInflater)
 
     private val finalPopupVerticalOffset: Int =
         indexedFastScrollerFactory.popupVerticalOffset.convertToDp(context)
@@ -67,12 +67,12 @@ class BottomSideIndexedFastScrollerPhone(
 
     fun initializeIndexView(): Deferred<BottomSideIndexedFastScrollerPhone> = CoroutineScope(SupervisorJob() + Dispatchers.Main).async {
 
-        bottomFastScrollerIndexViewBinding.indexView.removeAllViews()
+        bottomFastScrollerIndexViewPhoneBinding.indexView.removeAllViews()
 
         setupBottomIndex(
             context,
             rootView,
-            bottomFastScrollerIndexViewBinding,
+            bottomFastScrollerIndexViewPhoneBinding,
             indexedFastScrollerFactory,
             finalPopupVerticalOffset
         ).loadIndexData(indexedFastScrollerFactory.listOfNewCharOfItemsForIndex).await()
@@ -111,17 +111,17 @@ class BottomSideIndexedFastScrollerPhone(
 
         }
 
-        var sideIndexItem = layoutInflater.inflate(R.layout.bottom_fast_scroller_side_index_item, null) as TextView
+        var sideIndexItem = layoutInflater.inflate(R.layout.bottom_fast_scroller_side_index_item_phone, null) as TextView
 
         mapIndexFirstItem.keys.forEach { indexText ->
-            sideIndexItem = layoutInflater.inflate(R.layout.bottom_fast_scroller_side_index_item, null) as TextView
+            sideIndexItem = layoutInflater.inflate(R.layout.bottom_fast_scroller_side_index_item_phone, null) as TextView
             sideIndexItem.text = indexText.toUpperCase(Locale.getDefault())
 
             sideIndexItem.typeface = indexedFastScrollerFactory.indexItemFont
             sideIndexItem.setTextColor(indexedFastScrollerFactory.indexItemTextColor)
             sideIndexItem.setTextSize(TypedValue.COMPLEX_UNIT_SP, indexedFastScrollerFactory.indexItemSize)
 
-            bottomFastScrollerIndexViewBinding.indexView.addView(sideIndexItem)
+            bottomFastScrollerIndexViewPhoneBinding.indexView.addView(sideIndexItem)
         }
 
         val finalTextView = sideIndexItem
@@ -130,11 +130,11 @@ class BottomSideIndexedFastScrollerPhone(
         delay(777)
         /* *** */
 
-        var upperRange = (bottomFastScrollerIndexViewBinding.indexView.x - finalTextView.width).toInt()
+        var upperRange = (bottomFastScrollerIndexViewPhoneBinding.indexView.x - finalTextView.width).toInt()
 
-        for (number in 0 until bottomFastScrollerIndexViewBinding.indexView.childCount) {
-            val indexText = (bottomFastScrollerIndexViewBinding.indexView.getChildAt(number) as TextView).text.toString()
-            val indexRange = (bottomFastScrollerIndexViewBinding.indexView.getChildAt(number).x + bottomFastScrollerIndexViewBinding.indexView.x + finalTextView.width).toInt()
+        for (number in 0 until bottomFastScrollerIndexViewPhoneBinding.indexView.childCount) {
+            val indexText = (bottomFastScrollerIndexViewPhoneBinding.indexView.getChildAt(number) as TextView).text.toString()
+            val indexRange = (bottomFastScrollerIndexViewPhoneBinding.indexView.getChildAt(number).x + bottomFastScrollerIndexViewPhoneBinding.indexView.x + finalTextView.width).toInt()
 
             for (jRange in upperRange..indexRange) {
                 mapRangeIndex[jRange] = indexText
@@ -160,20 +160,20 @@ class BottomSideIndexedFastScrollerPhone(
         mapIndexFirstItem: LinkedHashMap<String, Int>,
         mapRangeIndex: LinkedHashMap<Int, String>) {
 
-        bottomFastScrollerIndexViewBinding.nestedIndexScrollView.startAnimation(
+        bottomFastScrollerIndexViewPhoneBinding.nestedIndexScrollView.startAnimation(
             AnimationUtils.loadAnimation(
                 context,
                 android.R.anim.fade_in
             )
         )
-        bottomFastScrollerIndexViewBinding.nestedIndexScrollView.visibility = View.VISIBLE
+        bottomFastScrollerIndexViewPhoneBinding.nestedIndexScrollView.visibility = View.VISIBLE
 
         val popupIndexOffsetX = (
                 finalPopupHorizontalOffset
-                        + bottomFastScrollerIndexViewBinding.popupIndex.width/2
+                        + bottomFastScrollerIndexViewPhoneBinding.popupIndex.width/2
                 ).toFloat()
 
-        bottomFastScrollerIndexViewBinding.nestedIndexScrollView.setOnTouchListener { view, motionEvent ->
+        bottomFastScrollerIndexViewPhoneBinding.nestedIndexScrollView.setOnTouchListener { view, motionEvent ->
 
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -181,15 +181,15 @@ class BottomSideIndexedFastScrollerPhone(
                         val indexText = mapRangeIndex[motionEvent.x.toInt()]
 
                         if (indexText != null) {
-                            bottomFastScrollerIndexViewBinding.popupIndex.x = motionEvent.rawX - popupIndexOffsetX
-                            bottomFastScrollerIndexViewBinding.popupIndex.text = indexText
-                            bottomFastScrollerIndexViewBinding.popupIndex.startAnimation(
+                            bottomFastScrollerIndexViewPhoneBinding.popupIndex.x = motionEvent.rawX - popupIndexOffsetX
+                            bottomFastScrollerIndexViewPhoneBinding.popupIndex.text = indexText
+                            bottomFastScrollerIndexViewPhoneBinding.popupIndex.startAnimation(
                                 AnimationUtils.loadAnimation(
                                     context,
                                     android.R.anim.fade_in
                                 )
                             )
-                            bottomFastScrollerIndexViewBinding.popupIndex.visibility = View.VISIBLE
+                            bottomFastScrollerIndexViewPhoneBinding.popupIndex.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -198,15 +198,15 @@ class BottomSideIndexedFastScrollerPhone(
                         val indexText = mapRangeIndex[motionEvent.x.toInt()]
 
                         if (indexText != null) {
-                            if (!bottomFastScrollerIndexViewBinding.popupIndex.isShown) {
-                                bottomFastScrollerIndexViewBinding.popupIndex.startAnimation(
+                            if (!bottomFastScrollerIndexViewPhoneBinding.popupIndex.isShown) {
+                                bottomFastScrollerIndexViewPhoneBinding.popupIndex.startAnimation(
                                     AnimationUtils.loadAnimation(context, android.R.anim.fade_in)
                                 )
-                                bottomFastScrollerIndexViewBinding.popupIndex.visibility = View.VISIBLE
+                                bottomFastScrollerIndexViewPhoneBinding.popupIndex.visibility = View.VISIBLE
                             }
 
-                            bottomFastScrollerIndexViewBinding.popupIndex.x = motionEvent.rawX - popupIndexOffsetX
-                            bottomFastScrollerIndexViewBinding.popupIndex.text = indexText
+                            bottomFastScrollerIndexViewPhoneBinding.popupIndex.x = motionEvent.rawX - popupIndexOffsetX
+                            bottomFastScrollerIndexViewPhoneBinding.popupIndex.text = indexText
 
                             nestedScrollView.smoothScrollTo(
                                 0,
@@ -216,18 +216,18 @@ class BottomSideIndexedFastScrollerPhone(
                             )
 
                         } else {
-                            if (bottomFastScrollerIndexViewBinding.popupIndex.isShown) {
-                                bottomFastScrollerIndexViewBinding.popupIndex.startAnimation(
+                            if (bottomFastScrollerIndexViewPhoneBinding.popupIndex.isShown) {
+                                bottomFastScrollerIndexViewPhoneBinding.popupIndex.startAnimation(
                                     AnimationUtils.loadAnimation(context, android.R.anim.fade_out)
                                 )
-                                bottomFastScrollerIndexViewBinding.popupIndex.visibility = View.INVISIBLE
+                                bottomFastScrollerIndexViewPhoneBinding.popupIndex.visibility = View.INVISIBLE
                             }
                         }
                     }
                 }
                 MotionEvent.ACTION_UP -> {
                     if (indexedFastScrollerFactory.popupEnable) {
-                        if (bottomFastScrollerIndexViewBinding.popupIndex.isShown) {
+                        if (bottomFastScrollerIndexViewPhoneBinding.popupIndex.isShown) {
 
                             nestedScrollView.smoothScrollTo(
                                 0,
@@ -236,13 +236,13 @@ class BottomSideIndexedFastScrollerPhone(
                                 ).y.toInt()
                             )
 
-                            bottomFastScrollerIndexViewBinding.popupIndex.startAnimation(
+                            bottomFastScrollerIndexViewPhoneBinding.popupIndex.startAnimation(
                                 AnimationUtils.loadAnimation(
                                     context,
                                     android.R.anim.fade_out
                                 )
                             )
-                            bottomFastScrollerIndexViewBinding.popupIndex.visibility = View.INVISIBLE
+                            bottomFastScrollerIndexViewPhoneBinding.popupIndex.visibility = View.INVISIBLE
                         }
                     } else {
 
@@ -256,7 +256,7 @@ class BottomSideIndexedFastScrollerPhone(
                 }
                 MotionEvent.ACTION_CANCEL -> {
                     if (indexedFastScrollerFactory.popupEnable) {
-                        if (bottomFastScrollerIndexViewBinding.popupIndex.isShown) {
+                        if (bottomFastScrollerIndexViewPhoneBinding.popupIndex.isShown) {
 
                             nestedScrollView.smoothScrollTo(
                                 0,
@@ -265,13 +265,13 @@ class BottomSideIndexedFastScrollerPhone(
                                 ).y.toInt()
                             )
 
-                            bottomFastScrollerIndexViewBinding.popupIndex.startAnimation(
+                            bottomFastScrollerIndexViewPhoneBinding.popupIndex.startAnimation(
                                 AnimationUtils.loadAnimation(
                                     context,
                                     android.R.anim.fade_out
                                 )
                             )
-                            bottomFastScrollerIndexViewBinding.popupIndex.visibility = View.INVISIBLE
+                            bottomFastScrollerIndexViewPhoneBinding.popupIndex.visibility = View.INVISIBLE
                         }
                     } else {
 
