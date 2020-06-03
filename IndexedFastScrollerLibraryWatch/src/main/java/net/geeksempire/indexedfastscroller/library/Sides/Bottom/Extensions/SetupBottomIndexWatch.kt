@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/18/20 9:34 AM
+ * Last modified 6/3/20 2:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,7 @@ import android.util.TypedValue
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
-import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
+import net.geeksempire.indexedfastscroller.library.Factory.indexedFastScrollerFactoryWatch
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Bottom.BottomSideIndexedFastScrollerWatch
 import net.geeksempire.indexedfastscroller.library.databinding.BottomFastScrollerIndexViewBinding
@@ -25,7 +25,7 @@ fun BottomSideIndexedFastScrollerWatch.setupBottomIndex(
     context: Context,
     rootView: ViewGroup,
     bottomFastScrollerIndexViewBinding: BottomFastScrollerIndexViewBinding,
-    indexedFastScrollerFactory: IndexedFastScrollerFactory,
+    indexedFastScrollerFactoryWatch: indexedFastScrollerFactoryWatch,
     finalPopupVerticalOffset: Int) : BottomSideIndexedFastScrollerWatch {
 
     //Root View
@@ -80,8 +80,8 @@ fun BottomSideIndexedFastScrollerWatch.setupBottomIndex(
 
     bottomFastScrollerIndexViewBinding.root
         .setPadding(
-            indexedFastScrollerFactory.rootPaddingStart, indexedFastScrollerFactory.rootPaddingTop,
-            indexedFastScrollerFactory.rootPaddingEnd, indexedFastScrollerFactory.rootPaddingBottom
+            indexedFastScrollerFactoryWatch.rootPaddingStart, indexedFastScrollerFactoryWatch.rootPaddingTop,
+            indexedFastScrollerFactoryWatch.rootPaddingEnd, indexedFastScrollerFactoryWatch.rootPaddingBottom
         )
 
     //Popup Text
@@ -92,18 +92,18 @@ fun BottomSideIndexedFastScrollerWatch.setupBottomIndex(
     bottomFastScrollerIndexViewBinding.popupIndex.layoutParams = popupIndexLayoutParams
 
     val popupIndexBackground: Drawable? =
-        indexedFastScrollerFactory.popupBackgroundShape ?: context.getDrawable(
+        indexedFastScrollerFactoryWatch.popupBackgroundShape ?: context.getDrawable(
             R.drawable.default_bottom_popup_background
         )?.mutate()
-    popupIndexBackground?.setTint(indexedFastScrollerFactory.popupBackgroundTint)
+    popupIndexBackground?.setTint(indexedFastScrollerFactoryWatch.popupBackgroundTint)
 
     bottomFastScrollerIndexViewBinding.popupIndex.background = popupIndexBackground
-    bottomFastScrollerIndexViewBinding.popupIndex.typeface = indexedFastScrollerFactory.popupTextFont
+    bottomFastScrollerIndexViewBinding.popupIndex.typeface = indexedFastScrollerFactoryWatch.popupTextFont
 
-    bottomFastScrollerIndexViewBinding.popupIndex.setTextColor(indexedFastScrollerFactory.popupTextColor)
+    bottomFastScrollerIndexViewBinding.popupIndex.setTextColor(indexedFastScrollerFactoryWatch.popupTextColor)
     bottomFastScrollerIndexViewBinding.popupIndex.setTextSize(
         TypedValue.COMPLEX_UNIT_SP,
-        indexedFastScrollerFactory.popupTextSize
+        indexedFastScrollerFactoryWatch.popupTextSize
     )
 
     return this@setupBottomIndex

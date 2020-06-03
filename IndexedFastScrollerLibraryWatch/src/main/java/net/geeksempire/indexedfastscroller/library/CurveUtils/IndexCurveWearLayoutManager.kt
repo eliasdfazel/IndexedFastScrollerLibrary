@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 2:00 AM
+ * Last modified 6/3/20 2:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,7 @@ import androidx.wear.widget.WearableLinearLayoutManager
 import java.lang.Float.min
 import kotlin.math.absoluteValue
 
-class IndexCurveWearLayoutManager(var maxIconProgress: Float = 0.65f) : WearableLinearLayoutManager.LayoutCallback() {
+class IndexCurveWearLayoutManager(private var maxIconProgress: Float = 0.65f) : WearableLinearLayoutManager.LayoutCallback() {
 
     private var progressToCenter: Float = 0f
 
@@ -32,8 +32,8 @@ class IndexCurveWearLayoutManager(var maxIconProgress: Float = 0.65f) : Wearable
             // Adjust to the maximum scale
             progressToCenter = min(progressToCenter, maxIconProgress)
 
-            scaleX = (1 /*- progressToCenter*/).toFloat()
-            scaleY = (1 /*- progressToCenter*/).toFloat()
+            scaleX = (1 - progressToCenter).toFloat()
+            scaleY = (1 - progressToCenter).toFloat()
         }
     }
 }

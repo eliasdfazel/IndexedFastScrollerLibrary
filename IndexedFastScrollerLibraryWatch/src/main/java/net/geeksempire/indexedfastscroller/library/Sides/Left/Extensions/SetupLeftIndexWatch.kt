@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/18/20 9:34 AM
+ * Last modified 6/3/20 2:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,7 @@ import android.util.TypedValue
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
-import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
+import net.geeksempire.indexedfastscroller.library.Factory.indexedFastScrollerFactoryWatch
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Left.LeftSideIndexedFastScrollerWatch
 import net.geeksempire.indexedfastscroller.library.databinding.LeftFastScrollerIndexViewBinding
@@ -25,7 +25,7 @@ fun LeftSideIndexedFastScrollerWatch.setupLeftIndex(
     context: Context,
     rootView: ViewGroup,
     leftFastScrollerIndexViewBinding: LeftFastScrollerIndexViewBinding,
-    indexedFastScrollerFactory: IndexedFastScrollerFactory,
+    indexedFastScrollerFactoryWatch: indexedFastScrollerFactoryWatch,
     finalPopupHorizontalOffset: Int) : LeftSideIndexedFastScrollerWatch {
 
     when (rootView) {
@@ -83,8 +83,8 @@ fun LeftSideIndexedFastScrollerWatch.setupLeftIndex(
 
     leftFastScrollerIndexViewBinding.root
         .setPadding(
-            indexedFastScrollerFactory.rootPaddingStart, indexedFastScrollerFactory.rootPaddingTop,
-            indexedFastScrollerFactory.rootPaddingEnd, indexedFastScrollerFactory.rootPaddingBottom
+            indexedFastScrollerFactoryWatch.rootPaddingStart, indexedFastScrollerFactoryWatch.rootPaddingTop,
+            indexedFastScrollerFactoryWatch.rootPaddingEnd, indexedFastScrollerFactoryWatch.rootPaddingBottom
         )
 
     //Popup Text
@@ -95,18 +95,18 @@ fun LeftSideIndexedFastScrollerWatch.setupLeftIndex(
     leftFastScrollerIndexViewBinding.popupIndex.layoutParams = popupIndexLayoutParams
 
     val popupIndexBackground: Drawable? =
-        indexedFastScrollerFactory.popupBackgroundShape ?: context.getDrawable(
+        indexedFastScrollerFactoryWatch.popupBackgroundShape ?: context.getDrawable(
             R.drawable.default_left_popup_background
         )?.mutate()
-    popupIndexBackground?.setTint(indexedFastScrollerFactory.popupBackgroundTint)
+    popupIndexBackground?.setTint(indexedFastScrollerFactoryWatch.popupBackgroundTint)
 
     leftFastScrollerIndexViewBinding.popupIndex.background = popupIndexBackground
-    leftFastScrollerIndexViewBinding.popupIndex.typeface = indexedFastScrollerFactory.popupTextFont
+    leftFastScrollerIndexViewBinding.popupIndex.typeface = indexedFastScrollerFactoryWatch.popupTextFont
 
-    leftFastScrollerIndexViewBinding.popupIndex.setTextColor(indexedFastScrollerFactory.popupTextColor)
+    leftFastScrollerIndexViewBinding.popupIndex.setTextColor(indexedFastScrollerFactoryWatch.popupTextColor)
     leftFastScrollerIndexViewBinding.popupIndex.setTextSize(
         TypedValue.COMPLEX_UNIT_SP,
-        indexedFastScrollerFactory.popupTextSize
+        indexedFastScrollerFactoryWatch.popupTextSize
     )
 
     return this@setupLeftIndex

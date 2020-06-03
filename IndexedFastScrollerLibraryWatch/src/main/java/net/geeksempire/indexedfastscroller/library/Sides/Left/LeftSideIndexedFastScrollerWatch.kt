@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/18/20 9:34 AM
+ * Last modified 6/3/20 3:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,10 +23,10 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
-import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
 import net.geeksempire.indexedfastscroller.library.Factory.calculateNavigationBarHeight
 import net.geeksempire.indexedfastscroller.library.Factory.calculateStatusBarHeight
 import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
+import net.geeksempire.indexedfastscroller.library.Factory.indexedFastScrollerFactoryWatch
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Left.Extensions.setupLeftIndex
 import net.geeksempire.indexedfastscroller.library.databinding.LeftFastScrollerIndexViewBinding
@@ -44,7 +44,7 @@ import kotlin.collections.LinkedHashMap
  * @param recyclerView Instance Of A RecyclerView That You Want To Populate With Items
  *
  *
- * @param indexedFastScrollerFactory Change Default Value Or Just Pass IndexedFastScrollerFactory()
+ * @param indexedFastScrollerFactoryWatch Change Default Value Or Just Pass IndexedFastScrollerFactory()
  **/
 class LeftSideIndexedFastScrollerWatch(
     private val context: Context,
@@ -52,7 +52,7 @@ class LeftSideIndexedFastScrollerWatch(
     private val rootView: ViewGroup,
     private val nestedScrollView: ScrollView,
     private val recyclerView: RecyclerView,
-    private val indexedFastScrollerFactory: IndexedFastScrollerFactory) {
+    private val indexedFastScrollerFactoryWatch: indexedFastScrollerFactoryWatch) {
 
     private val leftFastScrollerIndexViewBinding: LeftFastScrollerIndexViewBinding = LeftFastScrollerIndexViewBinding.inflate(layoutInflater)
 
@@ -60,10 +60,10 @@ class LeftSideIndexedFastScrollerWatch(
     private val navigationBarBarHeight = calculateNavigationBarHeight(context.resources)
 
     private val finalPopupVerticalOffset: Int =
-        indexedFastScrollerFactory.popupVerticalOffset.convertToDp(context)
+        indexedFastScrollerFactoryWatch.popupVerticalOffset.convertToDp(context)
 
     private val finalPopupHorizontalOffset: Int =
-        indexedFastScrollerFactory.popupHorizontalOffset.convertToDp(context)
+        indexedFastScrollerFactoryWatch.popupHorizontalOffset.convertToDp(context)
 
     init {
         Log.d(this@LeftSideIndexedFastScrollerWatch.javaClass.simpleName, "*** Indexed Fast Scroller Initialized ***")
@@ -77,9 +77,9 @@ class LeftSideIndexedFastScrollerWatch(
             context,
             rootView,
             leftFastScrollerIndexViewBinding,
-            indexedFastScrollerFactory,
+            indexedFastScrollerFactoryWatch,
             finalPopupHorizontalOffset
-        ).loadIndexData(indexedFastScrollerFactory.listOfNewCharOfItemsForIndex).await()
+        ).loadIndexData(indexedFastScrollerFactoryWatch.listOfNewCharOfItemsForIndex).await()
 
         this@LeftSideIndexedFastScrollerWatch
     }
@@ -121,9 +121,9 @@ class LeftSideIndexedFastScrollerWatch(
             sideIndexItem = layoutInflater.inflate(R.layout.left_fast_scroller_side_index_item, null) as TextView
             sideIndexItem.text = indexText.toUpperCase(Locale.getDefault())
 
-            sideIndexItem.typeface = indexedFastScrollerFactory.indexItemFont
-            sideIndexItem.setTextColor(indexedFastScrollerFactory.indexItemTextColor)
-            sideIndexItem.setTextSize(TypedValue.COMPLEX_UNIT_SP, indexedFastScrollerFactory.indexItemSize)
+            sideIndexItem.typeface = indexedFastScrollerFactoryWatch.indexItemFont
+            sideIndexItem.setTextColor(indexedFastScrollerFactoryWatch.indexItemTextColor)
+            sideIndexItem.setTextSize(TypedValue.COMPLEX_UNIT_SP, indexedFastScrollerFactoryWatch.indexItemSize)
 
             leftFastScrollerIndexViewBinding.indexView.addView(sideIndexItem)
         }
@@ -182,7 +182,7 @@ class LeftSideIndexedFastScrollerWatch(
 
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    if (indexedFastScrollerFactory.popupEnable) {
+                    if (indexedFastScrollerFactoryWatch.popupEnable) {
                         val indexText = mapRangeIndex[motionEvent.y.toInt()]
 
                         if (indexText != null) {
@@ -199,7 +199,7 @@ class LeftSideIndexedFastScrollerWatch(
                     }
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    if (indexedFastScrollerFactory.popupEnable) {
+                    if (indexedFastScrollerFactoryWatch.popupEnable) {
                         val indexText = mapRangeIndex[motionEvent.y.toInt()]
 
                         if (indexText != null) {
@@ -232,7 +232,7 @@ class LeftSideIndexedFastScrollerWatch(
                     }
                 }
                 MotionEvent.ACTION_UP -> {
-                    if (indexedFastScrollerFactory.popupEnable) {
+                    if (indexedFastScrollerFactoryWatch.popupEnable) {
                         if (leftFastScrollerIndexViewBinding.popupIndex.isShown) {
 
                             nestedScrollView.smoothScrollTo(
@@ -261,7 +261,7 @@ class LeftSideIndexedFastScrollerWatch(
                     }
                 }
                 MotionEvent.ACTION_CANCEL -> {
-                    if (indexedFastScrollerFactory.popupEnable) {
+                    if (indexedFastScrollerFactoryWatch.popupEnable) {
                         if (leftFastScrollerIndexViewBinding.popupIndex.isShown) {
 
                             nestedScrollView.smoothScrollTo(

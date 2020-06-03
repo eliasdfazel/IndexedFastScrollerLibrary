@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 1:59 AM
+ * Last modified 6/3/20 2:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,8 +12,8 @@ package net.geeksempire.indexedfastscroller.library.Sides.Right
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -23,10 +23,10 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
-import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
 import net.geeksempire.indexedfastscroller.library.Factory.calculateNavigationBarHeight
 import net.geeksempire.indexedfastscroller.library.Factory.calculateStatusBarHeight
 import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
+import net.geeksempire.indexedfastscroller.library.Factory.indexedFastScrollerFactoryWatch
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Right.Extensions.setupRightIndex
 import net.geeksempire.indexedfastscroller.library.databinding.RightFastScrollerIndexViewBinding
@@ -44,7 +44,7 @@ import kotlin.collections.LinkedHashMap
  * @param recyclerView Instance Of A RecyclerView That You Want To Populate With Items
  *
  *
- * @param indexedFastScrollerFactory Change Default Value Or Just Pass IndexedFastScrollerFactory()
+ * @param indexedFastScrollerFactoryWatchWatch Change Default Value Or Just Pass IndexedFastScrollerFactory()
  **/
 class RightSideIndexedFastScrollerWatch(
     private val context: Context,
@@ -52,7 +52,7 @@ class RightSideIndexedFastScrollerWatch(
     private val rootView: ViewGroup,
     private val nestedScrollView: ScrollView,
     private val recyclerView: RecyclerView,
-    private val indexedFastScrollerFactory: IndexedFastScrollerFactory) {
+    private val indexedFastScrollerFactoryWatchWatch: indexedFastScrollerFactoryWatch) {
 
     private val rightFastScrollerIndexViewBinding: RightFastScrollerIndexViewBinding = RightFastScrollerIndexViewBinding.inflate(layoutInflater)
 
@@ -60,10 +60,10 @@ class RightSideIndexedFastScrollerWatch(
     private val navigationBarBarHeight = calculateNavigationBarHeight(context.resources)
 
     private val finalPopupVerticalOffset: Int =
-        indexedFastScrollerFactory.popupVerticalOffset.convertToDp(context)
+        indexedFastScrollerFactoryWatchWatch.popupVerticalOffset.convertToDp(context)
 
     private val finalPopupHorizontalOffset: Int =
-        indexedFastScrollerFactory.popupHorizontalOffset.convertToDp(context)
+        indexedFastScrollerFactoryWatchWatch.popupHorizontalOffset.convertToDp(context)
 
     init {
         Log.d(this@RightSideIndexedFastScrollerWatch.javaClass.simpleName, "*** Indexed Fast Scroller Initialized ***")
@@ -76,10 +76,11 @@ class RightSideIndexedFastScrollerWatch(
         setupRightIndex(
             context,
             rootView,
+            layoutInflater,
             rightFastScrollerIndexViewBinding,
-            indexedFastScrollerFactory,
+            indexedFastScrollerFactoryWatchWatch,
             finalPopupHorizontalOffset
-        ).loadIndexData(indexedFastScrollerFactory.listOfNewCharOfItemsForIndex).await()
+        ).loadIndexData(indexedFastScrollerFactoryWatchWatch.listOfNewCharOfItemsForIndex).await()
 
         this@RightSideIndexedFastScrollerWatch
     }
@@ -120,10 +121,7 @@ class RightSideIndexedFastScrollerWatch(
         mapIndexFirstItem.keys.forEach { indexText ->
             sideIndexItem = layoutInflater.inflate(R.layout.right_fast_scroller_side_index_item, null) as TextView
             sideIndexItem.text = indexText.toUpperCase(Locale.getDefault())
-
-            sideIndexItem.typeface = indexedFastScrollerFactory.indexItemFont
-            sideIndexItem.setTextColor(indexedFastScrollerFactory.indexItemTextColor)
-            sideIndexItem.setTextSize(TypedValue.COMPLEX_UNIT_SP, indexedFastScrollerFactory.indexItemSize)
+            sideIndexItem.setTextColor(Color.TRANSPARENT)
 
             rightFastScrollerIndexViewBinding.indexView.addView(sideIndexItem)
         }
@@ -164,12 +162,7 @@ class RightSideIndexedFastScrollerWatch(
         mapIndexFirstItem: LinkedHashMap<String, Int>,
         mapRangeIndex: LinkedHashMap<Int, String>) {
 
-        rightFastScrollerIndexViewBinding.nestedIndexScrollView.startAnimation(
-            AnimationUtils.loadAnimation(
-                context,
-                android.R.anim.fade_in
-            )
-        )
+        rightFastScrollerIndexViewBinding.nestedIndexScrollView.visibility = View.VISIBLE
 
         val popupIndexOffsetY = (
                 statusBarHeight
@@ -180,7 +173,7 @@ class RightSideIndexedFastScrollerWatch(
 
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    if (indexedFastScrollerFactory.popupEnable) {
+                    if (indexedFastScrollerFactoryWatchWatch.popupEnable) {
                         val indexText = mapRangeIndex[motionEvent.y.toInt()]
 
                         if (indexText != null) {
@@ -197,7 +190,7 @@ class RightSideIndexedFastScrollerWatch(
                     }
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    if (indexedFastScrollerFactory.popupEnable) {
+                    if (indexedFastScrollerFactoryWatchWatch.popupEnable) {
                         val indexText = mapRangeIndex[motionEvent.y.toInt()]
 
                         if (indexText != null) {
@@ -230,7 +223,7 @@ class RightSideIndexedFastScrollerWatch(
                     }
                 }
                 MotionEvent.ACTION_UP -> {
-                    if (indexedFastScrollerFactory.popupEnable) {
+                    if (indexedFastScrollerFactoryWatchWatch.popupEnable) {
                         if (rightFastScrollerIndexViewBinding.popupIndex.isShown) {
 
                             nestedScrollView.smoothScrollTo(
@@ -259,7 +252,7 @@ class RightSideIndexedFastScrollerWatch(
                     }
                 }
                 MotionEvent.ACTION_CANCEL -> {
-                    if (indexedFastScrollerFactory.popupEnable) {
+                    if (indexedFastScrollerFactoryWatchWatch.popupEnable) {
                         if (rightFastScrollerIndexViewBinding.popupIndex.isShown) {
 
                             nestedScrollView.smoothScrollTo(

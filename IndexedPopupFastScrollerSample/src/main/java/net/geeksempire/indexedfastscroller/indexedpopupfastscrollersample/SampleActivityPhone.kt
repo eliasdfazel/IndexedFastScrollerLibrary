@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 1:53 AM
+ * Last modified 6/3/20 2:52 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package net.geeksempire.indexedfastscroller.indexedpopupfastscrollersample
 
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +23,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.geeksempire.indexedfastscroller.indexedpopupfastscrollersample.databinding.ActivitySampleViewsBinding
 import net.geeksempire.indexedfastscroller.library.Factory.IndexSide
-import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
+import net.geeksempire.indexedfastscroller.library.Factory.indexedFastScrollerFactoryWatch
 import net.geeksempire.indexedfastscroller.library.IndexedFastScrollerWatch
 import java.util.*
 import kotlin.collections.ArrayList
@@ -74,8 +75,9 @@ class SampleActivityPhone : AppCompatActivity() {
         }
 
         /*Indexed Popup Fast Scroller*/
-        val indexedFastScrollerFactory = IndexedFastScrollerFactory(
+        val indexedFastScrollerFactoryWatch = indexedFastScrollerFactoryWatch(
             indexData,
+            indexItemTextColor = Color.MAGENTA,
             indexSide = IndexSide.RIGHT,
             popupEnable = true
         )
@@ -85,7 +87,7 @@ class SampleActivityPhone : AppCompatActivity() {
             rootView = activitySampleViewsBinding.MainView,
             nestedScrollView = activitySampleViewsBinding.nestedScrollView,
             recyclerView = activitySampleViewsBinding.recyclerViewList,
-            indexedFastScrollerFactory = indexedFastScrollerFactory
+            indexedFastScrollerFactoryWatch = indexedFastScrollerFactoryWatch
         )
         indexedFastScrollerPhone.setupIndex().await()
         /*Indexed Popup Fast Scroller*/
