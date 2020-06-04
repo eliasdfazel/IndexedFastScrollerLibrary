@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/20 6:45 AM
+ * Last modified 6/4/20 6:51 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,8 +22,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.geeksempire.indexedfastscroller.indexedpopupfastscrollersample.databinding.ActivitySampleViewsBinding
 import net.geeksempire.indexedfastscroller.library.Factory.IndexSide
-import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactoryWatch
-import net.geeksempire.indexedfastscroller.library.IndexedFastScrollerWatch
+import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactoryPhone
+import net.geeksempire.indexedfastscroller.library.IndexedFastScrollerPhone
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -74,20 +74,20 @@ class SampleActivityPhone : AppCompatActivity() {
         }
 
         /*Indexed Popup Fast Scroller*/
-        val indexedFastScrollerFactoryWatch = IndexedFastScrollerFactoryWatch(
+        val indexedFastScrollerFactory = IndexedFastScrollerFactoryPhone(
             indexData,
-            indexSide = IndexSide.LEFT,
+            indexSide = IndexSide.BOTTOM,
             popupEnable = true
         )
-        val indexedFastScrollerWatch: IndexedFastScrollerWatch = IndexedFastScrollerWatch(
+        val indexedFastScroller: IndexedFastScrollerPhone = IndexedFastScrollerPhone(
             context = applicationContext,
             layoutInflater = layoutInflater,
             rootView = activitySampleViewsBinding.MainView,
             nestedScrollView = activitySampleViewsBinding.nestedScrollView,
             recyclerView = activitySampleViewsBinding.recyclerViewList,
-            indexedFastScrollerFactoryWatch = indexedFastScrollerFactoryWatch
+            indexedFastScrollerFactoryPhone = indexedFastScrollerFactory
         )
-        indexedFastScrollerWatch.setupIndex().await()
+        indexedFastScroller.setupIndex().await()
         /*Indexed Popup Fast Scroller*/
     }
 }
