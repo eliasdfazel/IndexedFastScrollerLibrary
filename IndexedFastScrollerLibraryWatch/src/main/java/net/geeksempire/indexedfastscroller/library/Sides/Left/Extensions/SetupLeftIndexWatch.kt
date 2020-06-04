@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/20 5:08 AM
+ * Last modified 6/4/20 5:16 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -65,8 +65,6 @@ private fun setupCurveLeftIndex(
         IndexedFastScrollerFactoryWatch,
         listOfNewCharOfItemsForIndex)
     nestedIndexScrollViewCurve.adapter = indexCurveItemAdapter
-
-    rootViewCurve.rotationY = 90f
 
     delay(500)
 
