@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2020 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 6/4/20 12:17 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedIndexScrollView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:foregroundGravity="center_vertical"
+        android:background="@android:color/transparent"
+        android:visibility="invisible"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+
+        apps:layout_constraintWidth_percent="0.3">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/indexView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:background="@android:color/transparent"
+            android:orientation="vertical"/>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/popupIndex"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:gravity="center"
+        android:textColor="@color/light"
+        android:textSize="15sp"
+        android:fontFamily="monospace"
+        android:background="@drawable/default_left_popup_background"
+        android:visibility="invisible"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
