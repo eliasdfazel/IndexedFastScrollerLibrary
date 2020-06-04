@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/20 4:37 AM
+ * Last modified 6/4/20 6:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -92,7 +92,7 @@ fun BottomSideIndexedFastScrollerWatch.setupBottomIndex(
             val rootLayoutParams =
                 bottomFastScrollerIndexViewWatchBinding.root.layoutParams as ConstraintLayout.LayoutParams
 
-            rootLayoutParams.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            rootLayoutParams.height = ConstraintLayout.LayoutParams.MATCH_PARENT
             rootLayoutParams.width = ConstraintLayout.LayoutParams.MATCH_PARENT
 
             rootLayoutParams.bottomToBottom = rootView.id
@@ -107,7 +107,7 @@ fun BottomSideIndexedFastScrollerWatch.setupBottomIndex(
             val rootLayoutParams =
                 bottomFastScrollerIndexViewWatchBinding.root.layoutParams as RelativeLayout.LayoutParams
 
-            rootLayoutParams.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            rootLayoutParams.height = ConstraintLayout.LayoutParams.MATCH_PARENT
             rootLayoutParams.width = ConstraintLayout.LayoutParams.MATCH_PARENT
 
             rootLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL)
