@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 11:52 PM
+ * Last modified 6/4/20 12:24 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -78,7 +78,7 @@ class SampleActivityPhone : AppCompatActivity() {
         val indexedFastScrollerFactoryWatch = indexedFastScrollerFactoryWatch(
             indexData,
             indexItemTextColor = Color.MAGENTA,
-            indexSide = IndexSide.LEFT,
+            indexSide = IndexSide.BOTTOM,
             popupEnable = true,
             popupTextColor = Color.GREEN
         )
