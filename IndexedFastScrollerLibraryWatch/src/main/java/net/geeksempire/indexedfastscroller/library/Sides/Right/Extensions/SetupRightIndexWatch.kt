@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/20 3:31 AM
+ * Last modified 6/4/20 6:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,8 +21,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.wear.widget.WearableLinearLayoutManager
 import androidx.wear.widget.WearableRecyclerView
 import kotlinx.coroutines.*
+import net.geeksempire.indexedfastscroller.library.CurveUtils.CurveData
 import net.geeksempire.indexedfastscroller.library.CurveUtils.IndexCurveItemAdapter
 import net.geeksempire.indexedfastscroller.library.CurveUtils.IndexCurveWearLayoutManager
+import net.geeksempire.indexedfastscroller.library.Factory.IndexSide
 import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactoryWatch
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScrollerWatch
@@ -52,20 +54,29 @@ private fun setupCurveRightIndex(
         scrollDegreesPerScreen = 90f
     }
 
-    val listOfNewCharOfItemsForIndex = IndexedFastScrollerFactoryWatch.listOfNewCharOfItemsForIndex
+    val stringHashSet: Set<String> = LinkedHashSet(IndexedFastScrollerFactoryWatch.listOfNewCharOfItemsForIndex)
 
-    val stringHashSet: Set<String> = LinkedHashSet(listOfNewCharOfItemsForIndex)
-    listOfNewCharOfItemsForIndex.clear()
-    listOfNewCharOfItemsForIndex.addAll(stringHashSet)
+    val listOfCharOfItemsForIndex = ArrayList<CurveData>()
+
+    stringHashSet.forEach {
+
+        listOfCharOfItemsForIndex.add(
+            CurveData(
+                it,
+                IndexSide.RIGHT
+            )
+        )
+    }
 
     val indexCurveItemAdapter: IndexCurveItemAdapter = IndexCurveItemAdapter(context,
         IndexedFastScrollerFactoryWatch,
-        listOfNewCharOfItemsForIndex)
+        listOfCharOfItemsForIndex
+    )
     nestedIndexScrollViewCurve.adapter = indexCurveItemAdapter
 
     delay(500)
 
-    nestedIndexScrollViewCurve.smoothScrollToPosition(listOfNewCharOfItemsForIndex.size/2)
+    nestedIndexScrollViewCurve.smoothScrollToPosition(listOfCharOfItemsForIndex.size/2)
     nestedIndexScrollViewCurve.visibility = View.VISIBLE
 }
 
