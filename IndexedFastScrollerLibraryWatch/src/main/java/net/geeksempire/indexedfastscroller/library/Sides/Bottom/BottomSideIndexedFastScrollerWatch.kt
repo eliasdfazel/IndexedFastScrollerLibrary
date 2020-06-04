@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/20 5:09 AM
+ * Last modified 6/4/20 6:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,7 +24,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
 import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactoryWatch
-import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Bottom.Extensions.setupBottomIndex
 import net.geeksempire.indexedfastscroller.library.databinding.BottomFastScrollerIndexViewWatchBinding
@@ -54,9 +53,6 @@ class BottomSideIndexedFastScrollerWatch(
 ) {
 
     private val bottomFastScrollerIndexViewWatchBinding: BottomFastScrollerIndexViewWatchBinding = BottomFastScrollerIndexViewWatchBinding.inflate(layoutInflater)
-
-    private val finalPopupHorizontalOffset: Int =
-        indexedFastScrollerFactoryWatch.popupHorizontalOffset.convertToDp(context)
 
     init {
         Log.d(this@BottomSideIndexedFastScrollerWatch.javaClass.simpleName, "*** Indexed Fast Scroller Initialized ***")
@@ -162,11 +158,6 @@ class BottomSideIndexedFastScrollerWatch(
         )
         bottomFastScrollerIndexViewWatchBinding.nestedIndexScrollView.visibility = View.VISIBLE
 
-        val popupIndexOffsetX = (
-                finalPopupHorizontalOffset
-                        + bottomFastScrollerIndexViewWatchBinding.popupIndex.width/2
-                ).toFloat()
-
         bottomFastScrollerIndexViewWatchBinding.nestedIndexScrollView.setOnTouchListener { view, motionEvent ->
 
             when (motionEvent.action) {
@@ -175,7 +166,6 @@ class BottomSideIndexedFastScrollerWatch(
                         val indexText = mapRangeIndex[motionEvent.x.toInt()]
 
                         if (indexText != null) {
-                            bottomFastScrollerIndexViewWatchBinding.popupIndex.x = motionEvent.rawX - popupIndexOffsetX
                             bottomFastScrollerIndexViewWatchBinding.popupIndex.text = indexText
                             bottomFastScrollerIndexViewWatchBinding.popupIndex.startAnimation(
                                 AnimationUtils.loadAnimation(
@@ -199,7 +189,6 @@ class BottomSideIndexedFastScrollerWatch(
                                 bottomFastScrollerIndexViewWatchBinding.popupIndex.visibility = View.VISIBLE
                             }
 
-                            bottomFastScrollerIndexViewWatchBinding.popupIndex.x = motionEvent.rawX - popupIndexOffsetX
                             bottomFastScrollerIndexViewWatchBinding.popupIndex.text = indexText
 
                             nestedScrollView.smoothScrollTo(
