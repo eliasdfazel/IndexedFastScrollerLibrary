@@ -42,7 +42,9 @@ indexedFastScroller.setupIndex().await()
 ```
 
 **Phone Demonstration FastScroller Popup Index** <br/>
+
 ![Phone Demonstration FastScroller Popup Index](https://github.com/EliasFazel10296/IndexedFastScrollerLibrary/blob/master/ScreenshotDemonstration/PhoneDemonstrationFastScrollerPopupIndex.jpg)
 
 **Watch Demonstration FastScroller Popup Index** <br/>
+
 ![Watch Demonstration FastScroller Popup Index](https://github.com/EliasFazel10296/IndexedFastScrollerLibrary/blob/master/ScreenshotDemonstration/WatchDemonstrationFastScrollerPopupIndex.jpg)
