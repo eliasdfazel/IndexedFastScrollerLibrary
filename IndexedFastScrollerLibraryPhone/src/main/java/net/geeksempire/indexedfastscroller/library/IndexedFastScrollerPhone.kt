@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/18/20 9:12 AM
+ * Last modified 6/4/20 3:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,7 +18,7 @@ import android.widget.ScrollView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
 import net.geeksempire.indexedfastscroller.library.Factory.IndexSide
-import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
+import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactoryPhone
 import net.geeksempire.indexedfastscroller.library.Sides.Bottom.BottomSideIndexedFastScrollerPhone
 import net.geeksempire.indexedfastscroller.library.Sides.Left.LeftSideIndexedFastScrollerPhone
 import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScrollerPhone
@@ -34,7 +34,7 @@ import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedF
  * @param recyclerView Instance Of A RecyclerView That You Want To Populate With Items
  *
  *
- * @param indexedFastScrollerFactory Change Default Value Or Just Pass IndexedFastScrollerFactory()
+ * @param indexedFastScrollerFactoryPhone Change Default Value Or Just Pass IndexedFastScrollerFactory()
  **/
 class IndexedFastScrollerPhone(
     private val context: Context,
@@ -42,7 +42,7 @@ class IndexedFastScrollerPhone(
     private val rootView: ViewGroup,
     private val nestedScrollView: ScrollView,
     private val recyclerView: RecyclerView,
-    private val indexedFastScrollerFactory: IndexedFastScrollerFactory) {
+    private val indexedFastScrollerFactoryPhone: IndexedFastScrollerFactoryPhone) {
 
     init {
         Log.d(this@IndexedFastScrollerPhone.javaClass.simpleName, "*** Indexed Fast Scroller Initialized ***")
@@ -50,7 +50,7 @@ class IndexedFastScrollerPhone(
 
     fun setupIndex(): Deferred<IndexedFastScrollerPhone> = CoroutineScope(SupervisorJob() + Dispatchers.Main).async {
 
-        when (indexedFastScrollerFactory.indexSide) {
+        when (indexedFastScrollerFactoryPhone.indexSide) {
             IndexSide.RIGHT -> {
                 Log.d(this@IndexedFastScrollerPhone.javaClass.simpleName, "*** Right Side Index ***")
 
@@ -60,7 +60,7 @@ class IndexedFastScrollerPhone(
                     rootView,
                     nestedScrollView,
                     recyclerView,
-                    indexedFastScrollerFactory
+                    indexedFastScrollerFactoryPhone
                 )
                 rightSideIndexedFastScrollerPhone.initializeIndexView().await()
 
@@ -74,7 +74,7 @@ class IndexedFastScrollerPhone(
                     rootView,
                     nestedScrollView,
                     recyclerView,
-                    indexedFastScrollerFactory
+                    indexedFastScrollerFactoryPhone
                 )
                 leftSideIndexedFastScrollerPhone.initializeIndexView().await()
 
@@ -88,7 +88,7 @@ class IndexedFastScrollerPhone(
                     rootView,
                     nestedScrollView,
                     recyclerView,
-                    indexedFastScrollerFactory
+                    indexedFastScrollerFactoryPhone
                 )
                 bottomSideIndexedFastScrollerPhone.initializeIndexView().await()
 
@@ -101,7 +101,7 @@ class IndexedFastScrollerPhone(
                     rootView,
                     nestedScrollView,
                     recyclerView,
-                    indexedFastScrollerFactory
+                    indexedFastScrollerFactoryPhone
                 )
                 rightSideIndexedFastScrollerPhone.initializeIndexView().await()
 

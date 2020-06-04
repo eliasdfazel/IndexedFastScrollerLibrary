@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 12:57 PM
+ * Last modified 6/4/20 3:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -53,7 +53,7 @@ object IndexSide {
         const val BOTTOM = 2
 }
 
-data class IndexedFastScrollerFactory(
+data class IndexedFastScrollerFactoryPhone(
         /**
          * When Populating Your List Get First Char Of Each Item Title By itemTextTitle.substring(0, 1).toUpperCase(Locale.getDefault()).
          * & Add It To A ArrayList<String>.

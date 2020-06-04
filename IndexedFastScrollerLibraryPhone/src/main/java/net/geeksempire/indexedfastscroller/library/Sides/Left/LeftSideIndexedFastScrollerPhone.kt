@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 9:26 AM
+ * Last modified 6/4/20 3:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,7 +23,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
-import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
+import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactoryPhone
 import net.geeksempire.indexedfastscroller.library.Factory.calculateNavigationBarHeight
 import net.geeksempire.indexedfastscroller.library.Factory.calculateStatusBarHeight
 import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
@@ -44,7 +44,7 @@ import kotlin.collections.LinkedHashMap
  * @param recyclerView Instance Of A RecyclerView That You Want To Populate With Items
  *
  *
- * @param indexedFastScrollerFactory Change Default Value Or Just Pass IndexedFastScrollerFactory()
+ * @param indexedFastScrollerFactoryPhone Change Default Value Or Just Pass IndexedFastScrollerFactory()
  **/
 class LeftSideIndexedFastScrollerPhone(
     private val context: Context,
@@ -52,7 +52,7 @@ class LeftSideIndexedFastScrollerPhone(
     private val rootView: ViewGroup,
     private val nestedScrollView: ScrollView,
     private val recyclerView: RecyclerView,
-    private val indexedFastScrollerFactory: IndexedFastScrollerFactory) {
+    private val indexedFastScrollerFactoryPhone: IndexedFastScrollerFactoryPhone) {
 
     private val leftFastScrollerIndexViewBinding: LeftFastScrollerIndexViewPhoneBinding = LeftFastScrollerIndexViewPhoneBinding.inflate(layoutInflater)
 
@@ -60,10 +60,10 @@ class LeftSideIndexedFastScrollerPhone(
     private val navigationBarBarHeight = calculateNavigationBarHeight(context.resources)
 
     private val finalPopupVerticalOffset: Int =
-        indexedFastScrollerFactory.popupVerticalOffset.convertToDp(context)
+        indexedFastScrollerFactoryPhone.popupVerticalOffset.convertToDp(context)
 
     private val finalPopupHorizontalOffset: Int =
-        indexedFastScrollerFactory.popupHorizontalOffset.convertToDp(context)
+        indexedFastScrollerFactoryPhone.popupHorizontalOffset.convertToDp(context)
 
     init {
         Log.d(this@LeftSideIndexedFastScrollerPhone.javaClass.simpleName, "*** Indexed Fast Scroller Initialized ***")
@@ -77,9 +77,9 @@ class LeftSideIndexedFastScrollerPhone(
             context,
             rootView,
             leftFastScrollerIndexViewBinding,
-            indexedFastScrollerFactory,
+            indexedFastScrollerFactoryPhone,
             finalPopupHorizontalOffset
-        ).loadIndexData(indexedFastScrollerFactory.listOfNewCharOfItemsForIndex).await()
+        ).loadIndexData(indexedFastScrollerFactoryPhone.listOfNewCharOfItemsForIndex).await()
 
         this@LeftSideIndexedFastScrollerPhone
     }
@@ -121,9 +121,9 @@ class LeftSideIndexedFastScrollerPhone(
             sideIndexItem = layoutInflater.inflate(R.layout.left_fast_scroller_side_index_item_phone, null) as TextView
             sideIndexItem.text = indexText.toUpperCase(Locale.getDefault())
 
-            sideIndexItem.typeface = indexedFastScrollerFactory.indexItemFont
-            sideIndexItem.setTextColor(indexedFastScrollerFactory.indexItemTextColor)
-            sideIndexItem.setTextSize(TypedValue.COMPLEX_UNIT_SP, indexedFastScrollerFactory.indexItemSize)
+            sideIndexItem.typeface = indexedFastScrollerFactoryPhone.indexItemFont
+            sideIndexItem.setTextColor(indexedFastScrollerFactoryPhone.indexItemTextColor)
+            sideIndexItem.setTextSize(TypedValue.COMPLEX_UNIT_SP, indexedFastScrollerFactoryPhone.indexItemSize)
 
             leftFastScrollerIndexViewBinding.indexView.addView(sideIndexItem)
         }
@@ -182,7 +182,7 @@ class LeftSideIndexedFastScrollerPhone(
 
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    if (indexedFastScrollerFactory.popupEnable) {
+                    if (indexedFastScrollerFactoryPhone.popupEnable) {
                         val indexText = mapRangeIndex[motionEvent.y.toInt()]
 
                         if (indexText != null) {
@@ -199,7 +199,7 @@ class LeftSideIndexedFastScrollerPhone(
                     }
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    if (indexedFastScrollerFactory.popupEnable) {
+                    if (indexedFastScrollerFactoryPhone.popupEnable) {
                         val indexText = mapRangeIndex[motionEvent.y.toInt()]
 
                         if (indexText != null) {
@@ -232,7 +232,7 @@ class LeftSideIndexedFastScrollerPhone(
                     }
                 }
                 MotionEvent.ACTION_UP -> {
-                    if (indexedFastScrollerFactory.popupEnable) {
+                    if (indexedFastScrollerFactoryPhone.popupEnable) {
                         if (leftFastScrollerIndexViewBinding.popupIndex.isShown) {
 
                             nestedScrollView.smoothScrollTo(
@@ -261,7 +261,7 @@ class LeftSideIndexedFastScrollerPhone(
                     }
                 }
                 MotionEvent.ACTION_CANCEL -> {
-                    if (indexedFastScrollerFactory.popupEnable) {
+                    if (indexedFastScrollerFactoryPhone.popupEnable) {
                         if (leftFastScrollerIndexViewBinding.popupIndex.isShown) {
 
                             nestedScrollView.smoothScrollTo(

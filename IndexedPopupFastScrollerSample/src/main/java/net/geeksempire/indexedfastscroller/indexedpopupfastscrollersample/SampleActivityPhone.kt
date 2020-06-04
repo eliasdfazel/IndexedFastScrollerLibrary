@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/20 12:24 AM
+ * Last modified 6/4/20 3:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.geeksempire.indexedfastscroller.indexedpopupfastscrollersample.databinding.ActivitySampleViewsBinding
 import net.geeksempire.indexedfastscroller.library.Factory.IndexSide
-import net.geeksempire.indexedfastscroller.library.Factory.indexedFastScrollerFactoryWatch
+import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactoryWatch
 import net.geeksempire.indexedfastscroller.library.IndexedFastScrollerWatch
 import java.util.*
 import kotlin.collections.ArrayList
@@ -75,7 +75,7 @@ class SampleActivityPhone : AppCompatActivity() {
         }
 
         /*Indexed Popup Fast Scroller*/
-        val indexedFastScrollerFactoryWatch = indexedFastScrollerFactoryWatch(
+        val indexedFastScrollerFactoryWatch = IndexedFastScrollerFactoryWatch(
             indexData,
             indexItemTextColor = Color.MAGENTA,
             indexSide = IndexSide.BOTTOM,

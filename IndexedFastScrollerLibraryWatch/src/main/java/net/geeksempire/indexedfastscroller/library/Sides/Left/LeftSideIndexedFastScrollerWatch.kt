@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/20 12:13 AM
+ * Last modified 6/4/20 5:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,8 +23,8 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
+import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactoryWatch
 import net.geeksempire.indexedfastscroller.library.Factory.convertToDp
-import net.geeksempire.indexedfastscroller.library.Factory.indexedFastScrollerFactoryWatch
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Left.Extensions.setupLeftIndex
 import net.geeksempire.indexedfastscroller.library.databinding.LeftFastScrollerIndexViewWatchBinding
@@ -50,7 +50,7 @@ class LeftSideIndexedFastScrollerWatch(
     private val rootView: ViewGroup,
     private val nestedScrollView: ScrollView,
     private val recyclerView: RecyclerView,
-    private val indexedFastScrollerFactoryWatchWatch: indexedFastScrollerFactoryWatch) {
+    private val indexedFastScrollerFactoryWatchWatch: IndexedFastScrollerFactoryWatch) {
 
     private val leftFastScrollerIndexViewBinding: LeftFastScrollerIndexViewWatchBinding = LeftFastScrollerIndexViewWatchBinding.inflate(layoutInflater)
 

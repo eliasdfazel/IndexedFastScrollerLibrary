@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/20 12:29 AM
+ * Last modified 6/4/20 3:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,7 +18,7 @@ import android.widget.ScrollView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
 import net.geeksempire.indexedfastscroller.library.Factory.IndexSide
-import net.geeksempire.indexedfastscroller.library.Factory.indexedFastScrollerFactoryWatch
+import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactoryWatch
 import net.geeksempire.indexedfastscroller.library.Sides.Bottom.BottomSideIndexedFastScrollerWatch
 import net.geeksempire.indexedfastscroller.library.Sides.Left.LeftSideIndexedFastScrollerWatch
 import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScrollerWatch
@@ -42,7 +42,7 @@ class IndexedFastScrollerWatch(
     private val rootView: ViewGroup,
     private val nestedScrollView: ScrollView,
     private val recyclerView: RecyclerView,
-    private val indexedFastScrollerFactoryWatch: indexedFastScrollerFactoryWatch) {
+    private val indexedFastScrollerFactoryWatch: IndexedFastScrollerFactoryWatch) {
 
     init {
         Log.d(this@IndexedFastScrollerWatch.javaClass.simpleName, "*** Indexed Fast Scroller Initialized ***")

@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/3/20 9:26 AM
+ * Last modified 6/4/20 3:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,7 @@ import android.util.TypedValue
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
-import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactory
+import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactoryPhone
 import net.geeksempire.indexedfastscroller.library.R
 import net.geeksempire.indexedfastscroller.library.Sides.Right.RightSideIndexedFastScrollerPhone
 import net.geeksempire.indexedfastscroller.library.databinding.RightFastScrollerIndexViewPhoneBinding
@@ -25,7 +25,7 @@ fun RightSideIndexedFastScrollerPhone.setupRightIndex(
     context: Context,
     rootView: ViewGroup,
     rightFastScrollerIndexViewPhoneBinding: RightFastScrollerIndexViewPhoneBinding,
-    indexedFastScrollerFactory: IndexedFastScrollerFactory,
+    indexedFastScrollerFactoryPhone: IndexedFastScrollerFactoryPhone,
     finalPopupHorizontalOffset: Int) : RightSideIndexedFastScrollerPhone {
 
     //Root View
@@ -80,8 +80,8 @@ fun RightSideIndexedFastScrollerPhone.setupRightIndex(
 
     rightFastScrollerIndexViewPhoneBinding.root
         .setPadding(
-            indexedFastScrollerFactory.rootPaddingStart, indexedFastScrollerFactory.rootPaddingTop,
-            indexedFastScrollerFactory.rootPaddingEnd, indexedFastScrollerFactory.rootPaddingBottom
+            indexedFastScrollerFactoryPhone.rootPaddingStart, indexedFastScrollerFactoryPhone.rootPaddingTop,
+            indexedFastScrollerFactoryPhone.rootPaddingEnd, indexedFastScrollerFactoryPhone.rootPaddingBottom
         )
 
     //Popup Text
@@ -92,18 +92,18 @@ fun RightSideIndexedFastScrollerPhone.setupRightIndex(
     rightFastScrollerIndexViewPhoneBinding.popupIndex.layoutParams = popupIndexLayoutParams
 
     val popupIndexBackground: Drawable? =
-        indexedFastScrollerFactory.popupBackgroundShape ?: context.getDrawable(
+        indexedFastScrollerFactoryPhone.popupBackgroundShape ?: context.getDrawable(
             R.drawable.default_right_popup_background
         )?.mutate()
-    popupIndexBackground?.setTint(indexedFastScrollerFactory.popupBackgroundTint)
+    popupIndexBackground?.setTint(indexedFastScrollerFactoryPhone.popupBackgroundTint)
 
     rightFastScrollerIndexViewPhoneBinding.popupIndex.background = popupIndexBackground
-    rightFastScrollerIndexViewPhoneBinding.popupIndex.typeface = indexedFastScrollerFactory.popupTextFont
+    rightFastScrollerIndexViewPhoneBinding.popupIndex.typeface = indexedFastScrollerFactoryPhone.popupTextFont
 
-    rightFastScrollerIndexViewPhoneBinding.popupIndex.setTextColor(indexedFastScrollerFactory.popupTextColor)
+    rightFastScrollerIndexViewPhoneBinding.popupIndex.setTextColor(indexedFastScrollerFactoryPhone.popupTextColor)
     rightFastScrollerIndexViewPhoneBinding.popupIndex.setTextSize(
         TypedValue.COMPLEX_UNIT_SP,
-        indexedFastScrollerFactory.popupTextSize
+        indexedFastScrollerFactoryPhone.popupTextSize
     )
 
     return this@setupRightIndex

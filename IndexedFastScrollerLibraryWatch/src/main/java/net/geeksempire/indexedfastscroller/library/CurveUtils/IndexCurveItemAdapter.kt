@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/20 12:27 AM
+ * Last modified 6/4/20 5:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,12 +17,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import net.geeksempire.indexedfastscroller.library.Factory.indexedFastScrollerFactoryWatch
+import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactoryWatch
 import net.geeksempire.indexedfastscroller.library.R
 import java.util.*
 
 class IndexCurveItemAdapter(private val context: Context,
-                            private val indexedFastScrollerFactoryWatchWatch: indexedFastScrollerFactoryWatch,
+                            private val indexedFastScrollerFactoryWatchWatch: IndexedFastScrollerFactoryWatch,
                             private val itemsIndex: ArrayList<String>) : RecyclerView.Adapter<IndexCurveItemAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
