@@ -2,7 +2,7 @@
  * Copyright © 2020 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/20 6:44 AM
+ * Last modified 6/10/20 6:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -42,7 +42,11 @@ private fun setupCurveLeftIndex(
 
     delay(1000)
 
-    val wearableLinearLayoutManager = WearableLinearLayoutManager(context, IndexCurveWearLayoutManager())
+    val wearableLinearLayoutManager = if (context.resources.configuration.isScreenRound){
+        WearableLinearLayoutManager(context, IndexCurveWearLayoutManager())
+    } else {
+        WearableLinearLayoutManager(context)
+    }
     nestedIndexScrollViewCurve.layoutManager = wearableLinearLayoutManager
 
     nestedIndexScrollViewCurve.setOnTouchListener { view, motionEvent -> true }
