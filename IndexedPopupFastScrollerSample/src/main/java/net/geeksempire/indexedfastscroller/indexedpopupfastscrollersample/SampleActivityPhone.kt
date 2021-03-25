@@ -1,8 +1,8 @@
 /*
- * Copyright © 2020 By Geeks Empire.
+ * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/20 6:48 AM
+ * Last modified 3/25/21 8:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,8 +22,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.geeksempire.indexedfastscroller.indexedpopupfastscrollersample.databinding.ActivitySampleViewsBinding
 import net.geeksempire.indexedfastscroller.library.Factory.IndexSide
-import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactoryWatch
-import net.geeksempire.indexedfastscroller.library.IndexedFastScrollerWatch
+import net.geeksempire.indexedfastscroller.library.Factory.IndexedFastScrollerFactoryPhone
+import net.geeksempire.indexedfastscroller.library.IndexedFastScrollerPhone
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -74,18 +74,18 @@ class SampleActivityPhone : AppCompatActivity() {
         }
 
         /*Indexed Popup Fast Scroller*/
-        val indexedFastScrollerFactory = IndexedFastScrollerFactoryWatch(
+        val indexedFastScrollerFactory = IndexedFastScrollerFactoryPhone(
             indexData,
             indexSide = IndexSide.RIGHT,
             popupEnable = true
         )
-        val indexedFastScroller = IndexedFastScrollerWatch(
+        val indexedFastScroller = IndexedFastScrollerPhone(
             context = applicationContext,
             layoutInflater = layoutInflater,
             rootView = activitySampleViewsBinding.MainView,
             nestedScrollView = activitySampleViewsBinding.nestedScrollView,
             recyclerView = activitySampleViewsBinding.recyclerViewList,
-            indexedFastScrollerFactoryWatch = indexedFastScrollerFactory
+            indexedFastScrollerFactoryPhone = indexedFastScrollerFactory
         )
         indexedFastScroller.setupIndex().await()
         /*Indexed Popup Fast Scroller*/

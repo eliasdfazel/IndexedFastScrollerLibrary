@@ -1,8 +1,8 @@
 /*
- * Copyright © 2020 By Geeks Empire.
+ * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/9/20 4:05 PM
+ * Last modified 3/25/21 9:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,26 +29,26 @@ fun Int.convertToDp(context: Context) : Int {
 }
 
 fun calculateStatusBarHeight(resources: Resources) : Int {
-    var navigationBarHeight = 0
+    var statusBarHeight = 0
 
-    val resourceIdNavigationBar: Int = resources.getIdentifier("navigation_bar_height", "dimen", "android")
+    val resourceIdNavigationBar: Int = resources.getIdentifier("status_bar_height", "dimen", "android")
     if (resourceIdNavigationBar > 0) {
-        navigationBarHeight = resources.getDimensionPixelSize(resourceIdNavigationBar)
+        statusBarHeight = resources.getDimensionPixelSize(resourceIdNavigationBar)
     }
 
-    return navigationBarHeight
+    return statusBarHeight
 }
 
 
 fun calculateNavigationBarHeight(resources: Resources) : Int {
-    var statusBarHeight = 0
+    var navigationBarHeight = 0
 
-    val resourceIdStatusBar: Int = resources.getIdentifier("status_bar_height", "dimen", "android")
+    val resourceIdStatusBar: Int = resources.getIdentifier("navigation_bar_height", "dimen", "android")
     if (resourceIdStatusBar > 0) {
-        statusBarHeight = resources.getDimensionPixelSize(resourceIdStatusBar)
+        navigationBarHeight = resources.getDimensionPixelSize(resourceIdStatusBar)
     }
 
-    return statusBarHeight
+    return navigationBarHeight
 }
 
 fun displayX(context: Context): Int {

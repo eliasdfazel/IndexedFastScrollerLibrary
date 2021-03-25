@@ -1,8 +1,8 @@
 /*
- * Copyright © 2020 By Geeks Empire.
+ * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/20 3:32 AM
+ * Last modified 3/25/21 9:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -56,8 +56,8 @@ class RightSideIndexedFastScrollerPhone(
 
     private val rightFastScrollerIndexViewPhoneBinding: RightFastScrollerIndexViewPhoneBinding = RightFastScrollerIndexViewPhoneBinding.inflate(layoutInflater)
 
-    private val statusBarHeight = calculateStatusBarHeight(context.resources)
-    private val navigationBarBarHeight = calculateNavigationBarHeight(context.resources)
+    private var statusBarHeight = calculateStatusBarHeight(context.resources)
+    private var navigationBarBarHeight = calculateNavigationBarHeight(context.resources)
 
     private val finalPopupVerticalOffset: Int =
         indexedFastScrollerFactoryPhone.popupVerticalOffset.convertToDp(context)
@@ -185,7 +185,9 @@ class RightSideIndexedFastScrollerPhone(
                         val indexText = mapRangeIndex[motionEvent.y.toInt()]
 
                         if (indexText != null) {
+
                             rightFastScrollerIndexViewPhoneBinding.popupIndex.y = motionEvent.rawY - popupIndexOffsetY
+
                             rightFastScrollerIndexViewPhoneBinding.popupIndex.text = indexText
                             rightFastScrollerIndexViewPhoneBinding.popupIndex.startAnimation(
                                 AnimationUtils.loadAnimation(
@@ -209,8 +211,8 @@ class RightSideIndexedFastScrollerPhone(
                                 rightFastScrollerIndexViewPhoneBinding.popupIndex.visibility = View.VISIBLE
                             }
 
-                            rightFastScrollerIndexViewPhoneBinding.popupIndex.y =
-                                motionEvent.rawY - popupIndexOffsetY
+                            rightFastScrollerIndexViewPhoneBinding.popupIndex.y = motionEvent.rawY - popupIndexOffsetY
+
                             rightFastScrollerIndexViewPhoneBinding.popupIndex.text = indexText
 
                             nestedScrollView.smoothScrollTo(
